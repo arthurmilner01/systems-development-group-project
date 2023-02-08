@@ -4,8 +4,23 @@
 {% block content %}
 
 <div class="content">
-    <h1>Home</h1>
-    <p style="font-size: 2em;">adskfjaldsjfkldsajfklasd;fjasdf askldfjaslkdjf ;lsajdflkajsdflk jas;ldfj ;ldsjk</p>
+    <h1 class="page-title">Home</h1>
+    <div class="row">
+        <div class="card text-white bg-dark mb-3" style="width: 50rem;">
+            <img class="card-img-top" src="{{ url_for('static', filename='images/logo.png')}}" alt="Graph showing players with the highest value.">
+            <div class="card-body">
+                <h5 class="card-title">Trending Players</h5>
+                <p class="card-text">Graph showing the players with the highest current value.</p>
+            </div>
+        </div>
+        <div class="card text-white bg-dark mb-3" style="width: 50rem;">
+            <img class="card-img-top" src="{{ url_for('static', filename='images/logo.png')}}" alt="Graph showing players with the highest value.">
+            <div class="card-body">
+                <h5 class="card-title">Most Valuable Clubs</h5>
+                <p class="card-text">Graph showing the clubs with the highest current value (based on the value of the clubs players).</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
