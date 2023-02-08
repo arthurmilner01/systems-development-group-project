@@ -42,7 +42,7 @@
     color: #ffff;
     margin-left: 10%;
     padding: 1px 16px;
-    height: 125vh;
+    height: 150vh;
     background-color: #121212
   }
 
@@ -50,5 +50,13 @@
   .page-title{
     margin-top: 30px;
     margin-bottom: 50px;
+  }
+
+  /* CSS for home page */
+  .center-homepage{
+    margin: auto;
+    width: 100%;
+    padding: 100px;
+    text-align: center;
   }
 
