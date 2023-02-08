@@ -1,14 +1,16 @@
- /*CSS for the logo on the sidebar */
+/*CSS for the logo on the sidebar */
  #logo{
     max-width: 100px;
     max-height: 100px;
+    margin-left: auto;
+    margin-right: auto;
  }
  
  /* The side navigation menu */
  .sidebar {
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 10%;
     background-color: #5c5c5c;
     position: fixed;
     height: 100%;
@@ -37,7 +39,9 @@
   
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
   div.content {
-    margin-left: 200px;
+    color: #ffff;
+    margin-left: 10%;
     padding: 1px 16px;
-    height: 1000px;
+    height: 100vh;
+    background-color: #121212
   }
