@@ -42,18 +42,13 @@
     color: #ffff;
     margin-left: 10%;
     padding: 1px 16px;
-    height: 100vh;
+    height: 125vh;
     background-color: #121212
   }
 
   /* CSS for page title */
   .page-title{
-    margin-top: 50px;
-    margin-bottom: 80px;
+    margin-top: 30px;
+    margin-bottom: 50px;
   }
 
-  /* CSS for card class in bootstrap */
-  .card{
-    color: #121212;
-    margin: 150px;
-  }
