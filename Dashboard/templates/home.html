@@ -8,14 +8,14 @@
     <div class="center-homepage">
         <div class="row">
             <div class="card text-white bg-dark mb-3" style="width: 50rem; margin-right: 100px; margin-left: 100px;">
-                <img class="card-img-top" src="http://via.placeholder.com/720x366" alt="Graph showing players with the highest value.">
+                <canvas id="trending-players-chart" width="720", height="366"></canvas>
                 <div class="card-body">
                     <h5 class="card-title">Trending Players</h5>
-                    <p class="card-text">Graph showing the players with the highest current value.</p>
+                    <p class="card-text">Graph showing the players with the highest potential increase in value.</p>
                 </div>
             </div>
             <div class="card text-white bg-dark mb-3" style="width: 50rem; margin-right: 100px; margin-left: 100px;">
-                <img class="card-img-top" src="http://via.placeholder.com/720x366" alt="Graph showing players with the highest value.">
+                <canvas id="valuable-clubs-chart" width="720", height="366"></canvas>
                 <div class="card-body">
                     <h5 class="card-title">Most Valuable Clubs</h5>
                     <p class="card-text">Graph showing the clubs with the highest current value (based on the value of the clubs players).</p>
@@ -35,5 +35,51 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('trending-players-chart');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    const ctx1 = document.getElementById('valuable-clubs-chart');
+
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [8, 9, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
 
 {% endblock %}
