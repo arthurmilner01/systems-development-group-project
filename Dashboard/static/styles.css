@@ -1,10 +1,10 @@
 /*CSS for the logo on the sidebar */
  #logo{
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 400px;
+    margin-bottom:30vh;
  }
  
  /* The side navigation menu */
@@ -15,7 +15,7 @@
     background-color: #242526;
     position: fixed;
     height: 100%;
-    overflow: auto;
+    overflow: auto; 
   }
   
   /* Sidebar links */
@@ -43,21 +43,20 @@
     color: #ffff;
     margin-left: 10%;
     padding: 1px 16px;
-    height: 150vh;
+    height: 100vh;
     background-color: #18191A
   }
 
-  /* CSS for page title */
+  /* CSS for page title text */
   .page-title{
-    margin-top: 30px;
-    margin-bottom: 50px;
+    margin-top: 2%;
+    margin-bottom: 2%;
   }
 
   /* CSS for home page */
   .center-homepage{
     margin: auto;
     width: 100%;
-    padding: 100px;
+    padding: 5%;
     text-align: center;
   }
-
