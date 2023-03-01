@@ -20,7 +20,7 @@
         <tr>
           {% for j in p %}
               {% if loop.index == 2 %}
-                <th scope="row"><a href="{{ url_for('home') }}">{{j}}</a></th> <!-- TODO: HAVE THIS SET TO PLAYER NAME, LINK GOES TO DYNAMICALLY GENERATED PAGE BASED ON PLAYER NAME/DETAILS -->
+                <th scope="row"><a href="{{ url_for('playerDetails', playerName=j) }}">{{j}}</a></th> <!-- TODO: HAVE THIS SET TO PLAYER NAME, LINK GOES TO DYNAMICALLY GENERATED PAGE BASED ON PLAYER NAME/DETAILS -->
               {% else %}
                 <th scope="row">{{j}}</th>
               {% endif %}

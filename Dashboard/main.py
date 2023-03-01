@@ -35,5 +35,11 @@ def clubs():
    print("Clubs")
    return render_template("clubs.html", clubHeadings = clubHeadings)
 
+@app.route("/players/<playerName>")
+def playerDetails(playerName):
+   print("Player Details")
+   return render_template('playerdetails.html', playerName = playerName)
+
+
 if __name__ == "__main__":
    app.run(debug = True) #will run the flask app
