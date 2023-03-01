@@ -27,7 +27,7 @@ def players():
       cur = conn.cursor()
       cur.execute("SELECT * FROM Players")
       playerData = cur.fetchall()
-      print(playerData[0][1])
+   conn.close()
    return render_template("players.html", playerHeadings = playerHeadings, playerData=playerData)
 
 @app.route("/clubs") #Route for the clubs page        
