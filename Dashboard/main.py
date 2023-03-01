@@ -38,11 +38,12 @@ def clubs():
 @app.route("/players/<playerID>")
 def playerDetails(playerID):
    print("Player Details")
+   print(playerID)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT player_name FROM Players WHERE player_ID = ?", playerID)
+      cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID, ))
       playerName = cur.fetchone()
-      playerName = playerName[0]
+      playerName = playerName[1]
    conn.close()
    return render_template('playerdetails.html', playerID = playerID, playerName = playerName)
 
