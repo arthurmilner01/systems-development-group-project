@@ -12,14 +12,18 @@ def home():
       cur = conn.cursor()
       cur.execute("SELECT * FROM Players")
       data = cur.fetchall()
-      print(data[0])
    return render_template("home.html", data = data[0])
 
 @app.route("/players") #Route for the players page        
 def players():
-   playerHeadings = ['Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Team Location', 'Team Manager', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
+   playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Team Location', 'Team Manager', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
    print("Players")
-   return render_template("players.html", playerHeadings)
+   with sqlite3.connect('MoneyballDB.db') as conn:      
+      cur = conn.cursor()
+      cur.execute("SELECT * FROM Players")
+      playerData = cur.fetchall()
+      print(playerData)
+   return render_template("players.html", playerHeadings = playerHeadings, playerData=playerData)
 
 @app.route("/clubs") #Route for the clubs page        
 def clubs():

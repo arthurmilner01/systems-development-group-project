@@ -7,27 +7,26 @@
     <h1 class="page-title">Players</h1>
     <p style="font-size: 2em;">Player Selection:</p>
 
-    <div class="jumbotron text-center">
-        <h1>My First Bootstrap Page</h1>
-        <p>Resize this responsive page to see the effect!</p>
-      </div>
+
+    <table class="table" style="color:#ffff">
+      <thead>
+        <tr>
+        {% for i in playerHeadings%}
+          <th scope="col">{{i}}</th>
+        {%endfor%}
+        </tr>
       
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-4">
-            <h3>Column 1</h3>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-          <div class="col-sm-4">
-            <h3>Column 2</h3>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-          <div class="col-sm-4">
-            <h3>Column 3</h3>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-      </div>
+      </thead>
+      <tbody>
+        {% for p in playerData %}
+        <tr>
+          {% for j in p %}
+          <th scope="row">{{j}}</th>
+          {% endfor %}
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
 </div>
 
 
