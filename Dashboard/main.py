@@ -1,13 +1,23 @@
 from DatabaseAccess import *
+import sqlite3
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
+def get_db_connection():
+    conn = sqlite3.connect('MoneyballDB.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 @app.route("/home") #Route for the about us page
 @app.route("/")        
 def home():
    print("Home")
-   return render_template("home.html")
+   with sqlite3.connect('MoneyballDB.db') as conn:      
+      cur = conn.cursor()
+      cur.execute("SELECT * FROM Players")
+      data = cur.fetchall()
+      print(data[0])
+   return render_template("home.html", data = data[0])
 
 @app.route("/players") #Route for the players page        
 def players():
