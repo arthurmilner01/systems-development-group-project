@@ -1,5 +1,13 @@
 from DatabaseAccess import *
 from flask import Flask, render_template
+import csv
+import os
+
+absolutePath = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(absolutePath, "Players_File.csv"), "r") as csvFile:
+    reader = csv.reader(csvFile)
+    
 
 
 app = Flask(__name__)
