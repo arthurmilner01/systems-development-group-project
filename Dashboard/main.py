@@ -17,6 +17,7 @@ def home():
       cur = conn.cursor()
       cur.execute("SELECT * FROM Players")
       data = cur.fetchall()
+   conn.close()
    return render_template("home.html", data = data[0])
 
 @app.route("/players") #Route for the players page        
