@@ -1,12 +1,11 @@
 from DatabaseAccess import *
 from flask import Flask, render_template
-import csv
-import os
 
-absolutePath = os.path.dirname(os.path.abspath(__file__))
 
-with open(os.path.join(absolutePath, "Players_File.csv"), "r") as csvFile:
-    reader = csv.reader(csvFile)
+
+playerHeadings = ['Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Team Location', 'Team Manager', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
+clubHeadings = ['Team Name', 'Team Location', 'Team Manager']
+
     
 
 
