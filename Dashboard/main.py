@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Team Location', 'Team Manager', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
-clubHeadings = ['Team Name', 'Team Location', 'Team Manager']
+clubHeadings = ['Club Name', 'Club Location', 'Club Manager']
 
 
 @app.route("/home") #Route for the about us page
