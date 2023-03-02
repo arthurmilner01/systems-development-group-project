@@ -106,7 +106,7 @@ def playerDetails(playerID):
    print(playerFuturePrices)
 
    conn.close()
-   return render_template('playerdetails.html', playerID = playerID, playerName = playerName)
+   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerData= playerData, playerHeadings=playerHeadings)
 
 
 if __name__ == "__main__":
