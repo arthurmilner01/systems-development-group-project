@@ -60,7 +60,7 @@ def playerDetails(playerID):
    print(playerID)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID, ))
+      cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID,))
       playerInfo = cur.fetchall()
       print(playerInfo)
       playerName = playerInfo[0][1]
@@ -106,7 +106,7 @@ def playerDetails(playerID):
    print(playerFuturePrices)
 
    conn.close()
-   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerData= playerData, playerHeadings=playerHeadings)
+   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerData= playerInfo, playerHeadings=playerHeadings)
 
 
 if __name__ == "__main__":
