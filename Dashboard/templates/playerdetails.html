@@ -7,6 +7,20 @@
 
     <p style="font-size: 2em;">Details for {{ playerName }}:</p>
 
+    <table class="table table-hover table-striped table-dark" style="color:#ffff">
+        <thead>
+          <tr>
+            {% for col in playerHeadings %}
+              <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in playerData %}
+          <th scope="row">{{i}}</th>
+          {% endfor%}
+        </tbody>
+      </table>
 
 </div>
 
