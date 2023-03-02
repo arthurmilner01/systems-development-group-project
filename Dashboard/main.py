@@ -98,7 +98,12 @@ def playerDetails(playerID):
    print(playerPrices)
 
    conn.close()
-   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerData= playerInfo, playerHeadings=playerHeadings)
+   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerDoB = playerDoB,\
+                           playerGender = playerGender, playerDateSignedUp = playerDateSignedUp, playerCurrentTeam = playerCurrentTeam,\
+                           playerTeamLocation = playerTeamLocation, playerTeamManager = playerTeamManager, playerSalary = playerSalary,\
+                           playerStartOfContract = playerStartOfContract, playerContractDuration = playerContractDuration,\
+                           playerGamesPlayedThisYear = playerGamesPlayedThisYear, playerGamesWon = playerGamesWon, playerFutureGames = playerFutureGames,\
+                           playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices)
 
 
 if __name__ == "__main__":

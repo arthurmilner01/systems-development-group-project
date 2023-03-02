@@ -6,7 +6,54 @@
     <h1 class="page-title">Player Details:</h1>
 
     <p style="font-size: 2em;">Details for {{ playerName }}:</p>
+    <div class="row">
+      <div class="card text-white bg-dark mb-3" style="width: 20%; margin-right: 10%; margin-left: 10%;">
+          <img class="" src="http://via.placeholder.com/225x250" alt="Photo of Player.">
+          <div class="card-body">
+              <h5 class="card-title">Player Details:</h5>
+              <p class="card-text">
+                  The player {{ playerName }}, born in {{ playerDoB }}, is currently playing for {{ playerCurrentTeam }},
+                  located in {{ playerTeamLocation }}, and managed by {{ playerTeamManager }}. He signed for the club on 
+                  {{ playerStartOfContract }} for a {{ playerContractDuration }} year deal, of which {{ playerWeeksLeftInContract }} 
+                  weeks remain. This year the player has played {{ playerGamesPlayedThisYear }} and won {{ playerGamesWon }}, before 
+                  taking into account his possible next 5 results this leaves him at a market value of £{{ playerPrices[0] }}.
+              </p>
+          </div>
+      </div>
+      <div class="card text-white bg-dark mb-3" style="width: 50%; margin-right: 5%; margin-left: 5%;">
+          <canvas id="player-prices-chart" width="720", height="366"></canvas>
+      </div>
+  </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+  const ctx = document.getElementById('player-prices-chart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
+      datasets: [{
+        label: '# Market Value',
+        data: {{ playerPrices }},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  const ctx1 = document.getElementById('valuable-clubs-chart');
+
+</script>
+
 
 {% endblock %}
