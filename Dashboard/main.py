@@ -8,24 +8,22 @@ app = Flask(__name__)
 playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Team Location', 'Team Manager', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
 clubHeadings = ['Club Name', 'Club Location', 'Club Manager']
 
-def calculateCurrentPrice(playerSalary, playerWeeksLeftInContract, playerBaseWinRate):
-   return (playerSalary * playerWeeksLeftInContract * playerBaseWinRate)
-
-def calculateFuturePrices(playerSalary, playerGamesWon, playerGamesPlayedThisYear, playerWeeksLeftInContract, playerFutureGames):
-   playerFuturePrices = []
+def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames):
+   playerPrices = []
+   baseWinRate = playerGamesWon / playerGamesPlayedThisYear
+   basePrice = playerSalary * playerWeeksLeftInContract * baseWinRate
+   playerPrices.append(basePrice)
    for i in range(len(playerFutureGames)):
-      if playerFutureGames == 'W':
+      if playerFutureGames[i] == 'W':
          playerGamesWon += 1
          playerGamesPlayedThisYear += 1
-         playerWeeksLeftInContract -= 1
       else:
          playerGamesPlayedThisYear += 1
-         playerWeeksLeftInContract -= 1
 
       newWinRate = playerGamesWon / playerGamesPlayedThisYear
       priceAfterGame = playerSalary * playerWeeksLeftInContract * newWinRate
-      playerFuturePrices.append(priceAfterGame)
-   return playerFuturePrices
+      playerPrices.append(priceAfterGame)
+   return playerPrices
 
 @app.route("/home") #Route for the about us page
 @app.route("/")        
@@ -95,15 +93,9 @@ def playerDetails(playerID):
    #Find the difference between them for the remaining weeks in players contract
    playerWeeksLeftInContract = playerWeeksInContract - playerWeeksPlayedOfContract
    print(playerWeeksLeftInContract)
-   #Get the win rate not based on any future games
-   playerBaseWinRate = playerGamesWon / playerGamesPlayedThisYear
-   print(playerBaseWinRate)
-   #Get price of player before any future games
-   playerCurrentPrice = calculateCurrentPrice(playerSalary, playerWeeksLeftInContract, playerBaseWinRate)
-   print(playerCurrentPrice)
-   #Get price of player after each future game
-   playerFuturePrices = calculateFuturePrices(playerSalary, playerGamesWon, playerGamesPlayedThisYear, playerWeeksLeftInContract, playerFutureGames)
-   print(playerFuturePrices)
+   #Get price of player and price after each future game
+   playerPrices = calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames)
+   print(playerPrices)
 
    conn.close()
    return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerData= playerInfo, playerHeadings=playerHeadings)
