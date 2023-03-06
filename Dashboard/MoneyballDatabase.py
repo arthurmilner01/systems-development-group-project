@@ -27,6 +27,9 @@ cur.execute('''
 DROP TABLE if exists Players
 ''')
 
+cur.execute('''
+DROP TABLE if exists Clubs
+''')
 
 #Creating Tables
 cur.execute('''
@@ -36,6 +39,11 @@ date_signed_up DATE NOT NULL, current_team varchar(120) NOT NULL, team_location 
 team_manager varchar(120) NOT NULL, salary INT NOT NULL, start_of_contract DATE NOT NULL, 
 contract_duration INT NOT NULL, games_played_this_year INT NOT NULL, games_won INT NOT NULL,
 future_games char(5) NOT NULL)
+''')
+
+cur.execute('''
+CREATE TABLE Clubs
+(club_ID INTEGER PRIMARY KEY, club_name varchar(120) UNIQUE NOT NULL, club_location varchar(120) NOT NULL, club_manager varchar(120) NOT NULL)
 ''')
 
 for player in playerData:

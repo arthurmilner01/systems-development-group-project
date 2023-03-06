@@ -2,7 +2,7 @@
 #Simply gets the database connection, same as examples given
 import sqlite3
 
-conn = sqlite3.connect('HorizonCinemaDB.db')
+conn = sqlite3.connect('MoneyballDB.db')
 
 cur = conn.cursor()
 
