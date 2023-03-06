@@ -124,8 +124,13 @@ def clubDetails(clubID):
       cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubID,))
       clubData = cur.fetchone()
    conn.close()
+   with sqlite3.connect('MoneyballDB.db') as conn:      
+      cur = conn.cursor()
+      cur.execute("SELECT player_name FROM Players WHERE current_team = ?", (clubID,))
+      players = cur.fetchall()
+   conn.close()
    
-   return render_template('clubdetails.html', clubID = clubID, clubData = clubData)
+   return render_template('clubdetails.html', clubID = clubID, clubData = clubData, players = players)
 
 
 if __name__ == "__main__":
