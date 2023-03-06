@@ -61,7 +61,7 @@ def home():
       for j in range(len(trendingPlayers[i])):
          trendingPlayers[i][j] = round(trendingPlayers[i][j], 2)
    print(trendingPlayers)
-   return render_template("home.html", data = trendingPlayers[0])
+   return render_template("home.html", data = trendingPlayers[0], playerToWatch = data[0])
 
 @app.route("/players") #Route for the players page        
 def players():
