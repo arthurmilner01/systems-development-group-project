@@ -21,7 +21,7 @@
               {% if loop.index == 2 %}
                 <th scope="row"><a href="{{ url_for('playerDetails', playerName=j) }}">{{j}}</a></th>
               {%elif loop.index == 6 %}
-                <th scope="row"><a href="{{ url_for('clubDetails', clubID=j) }}">{{j}}</a></th>
+                <th scope="row"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></th>
               {% else %}
                 <th scope="row">{{j}}</th>
               {% endif %}

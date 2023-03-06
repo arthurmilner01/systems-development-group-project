@@ -130,15 +130,15 @@ def playerDetails(playerName):
                            playerGamesPlayedThisYear = playerGamesPlayedThisYear, playerGamesWon = playerGamesWon, playerFutureGames = playerFutureGames,\
                            playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices)
 
-@app.route("/clubs/<clubID>")
-def clubDetails(clubID):
+@app.route("/clubs/<clubName>")
+def clubDetails(clubName):
    print("Club Details")
-   print(clubID)
+   print(clubName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubID,))
+      cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubName,))
       clubData = cur.fetchone()      
-      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games FROM Players WHERE current_team = ?", (clubID,))
+      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games FROM Players WHERE current_team = ?", (clubName,))
       players = cur.fetchall()
       clubValues = [0,0,0,0,0,0]
       for player in players:
@@ -151,7 +151,7 @@ def clubDetails(clubID):
    conn.close()
 
 
-   return render_template('clubdetails.html', clubID = clubID, clubData = clubData, clubValues = clubValues)
+   return render_template('clubdetails.html', clubID = clubName, clubData = clubData, clubValues = clubValues)
 
 
 if __name__ == "__main__":
