@@ -17,8 +17,10 @@ def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, pla
       if playerFutureGames[i] == 'W':
          playerGamesWon += 1
          playerGamesPlayedThisYear += 1
+         playerWeeksLeftInContract -= 1
       else:
          playerGamesPlayedThisYear += 1
+         playerWeeksLeftInContract -= 1
 
       newWinRate = playerGamesWon / playerGamesPlayedThisYear
       priceAfterGame = playerSalary * playerWeeksLeftInContract * newWinRate
