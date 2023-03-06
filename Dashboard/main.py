@@ -100,22 +100,6 @@ def playerDetails(playerID):
    #Convert salary to value in thousands (e.g. 50 becomes 50000)
    playerSalary = int(playerSalary) * 1000
    print(playerSalary)
-   # #Get current date in desired format
-   # currentDate = datetime.now()
-   # currentDate = currentDate.strftime("%d/%m/%Y")
-   # currentDate = datetime.strptime(currentDate, "%d/%m/%Y")
-   # #Get start of contract in desired format
-   # playerStartOfContractAsDate = datetime.strptime(playerStartOfContract, '%d/%m/%Y')
-   # #Get the weeks the player has already played of his contract
-   # playerWeeksPlayedOfContract = (currentDate - playerStartOfContractAsDate).days
-   # playerWeeksPlayedOfContract = playerWeeksPlayedOfContract // 7
-   # #Get the weeks the player has over his entire contract
-   # playerWeeksInContract = ((playerContractDuration * 365) // 7)
-   # print(playerWeeksInContract)
-   # print(playerWeeksPlayedOfContract)
-   # #Find the difference between them for the remaining weeks in players contract
-   # playerWeeksLeftInContract = playerWeeksInContract - playerWeeksPlayedOfContract
-   # print(playerWeeksLeftInContract)
    playerWeeksLeftInContract = getWeeksLeftInContract(playerStartOfContract, playerContractDuration)
    #Get price of player and price after each future game
    playerPrices = calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames)
