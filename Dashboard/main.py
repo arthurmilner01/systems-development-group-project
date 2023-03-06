@@ -151,7 +151,7 @@ def clubDetails(clubName):
    conn.close()
 
 
-   return render_template('clubdetails.html', clubID = clubName, clubData = clubData, clubValues = clubValues)
+   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues)
 
 
 if __name__ == "__main__":
