@@ -66,17 +66,17 @@
         ]
       },
       options: {
-        tooltips: {
-          mode: 'index',
-          intersect: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white'}
         },
-        scales: {
-          y: {
-            beginAtZero: false
-          }
+        x: {
+          ticks: { color: 'white'}
         }
       }
-    });
+    }
+  });
     const ctx1 = document.getElementById('valuable-clubs-chart');
 
     new Chart(ctx1, {
@@ -90,13 +90,17 @@
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white'}
+        },
+        x: {
+          ticks: { color: 'white'}
         }
       }
-    });
+    }
+  });
   </script>
 
 {% endblock %}
