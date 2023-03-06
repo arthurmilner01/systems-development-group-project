@@ -38,7 +38,7 @@
       labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
       datasets: [{
         label: 'Market Value in £',
-        borderColor: "#FFFFFF",
+        color: 'white',
         data: {{ playerPrices }},
         borderWidth: 1
       }]
@@ -46,7 +46,11 @@
     options: {
       scales: {
         y: {
-          beginAtZero: false
+          beginAtZero: false,
+          ticks: { color: 'white'}
+        },
+        x: {
+          ticks: { color: 'white'}
         }
       }
     }
