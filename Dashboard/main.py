@@ -87,13 +87,13 @@ def clubs():
    conn.close()
    return render_template("clubs.html", clubHeadings = clubHeadings, clubData=clubData)
 
-@app.route("/players/<playerID>")
-def playerDetails(playerID):
+@app.route("/players/<playerName>")
+def playerDetails(playerName):
    print("Player Details")
-   print(playerID)
+   print(playerName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID,))
+      cur.execute("SELECT * FROM Players WHERE player_name = ?", (playerName,))
       playerInfo = cur.fetchone()
       print(playerInfo)
       playerName = playerInfo[1]
@@ -123,7 +123,7 @@ def playerDetails(playerID):
    print(playerPrices)
 
    conn.close()
-   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerDoB = playerDoB,\
+   return render_template('playerdetails.html', playerName = playerName, playerDoB = playerDoB,\
                            playerGender = playerGender, playerDateSignedUp = playerDateSignedUp, playerCurrentTeam = playerCurrentTeam,\
                            playerTeamLocation = playerTeamLocation, playerTeamManager = playerTeamManager, playerSalary = playerSalary,\
                            playerStartOfContract = playerStartOfContract, playerContractDuration = playerContractDuration,\

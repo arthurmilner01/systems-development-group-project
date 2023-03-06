@@ -18,8 +18,8 @@
         {% for p in playerData %}
         <tr>
           {% for j in p %}
-              {% if loop.index == 1 %}
-                <th scope="row"><a href="{{ url_for('playerDetails', playerID=j) }}">{{j}}</a></th>
+              {% if loop.index == 2 %}
+                <th scope="row"><a href="{{ url_for('playerDetails', playerName=j) }}">{{j}}</a></th>
               {%elif loop.index == 6 %}
                 <th scope="row"><a href="{{ url_for('clubDetails', clubID=j) }}">{{j}}</a></th>
               {% else %}
