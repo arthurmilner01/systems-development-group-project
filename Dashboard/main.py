@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
-clubHeadings = ['Club Name', 'Club Location', 'Club Manager']
+clubHeadings = ['Club ID', 'Club Name', 'Club Location', 'Club Manager']
 
 def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames):
    playerPrices = []
