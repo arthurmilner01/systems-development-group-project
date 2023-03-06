@@ -45,23 +45,38 @@
     const ctx = document.getElementById('trending-players-chart');
   
     new Chart(ctx, {
-      type: 'line',
+      type: 'scatter',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: 'Market Value in £',
-          data: {{ data }},
-          borderWidth: 1
-        }]
+        //labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
+        dataset: [
+        {
+          //label: {{ player1 }},
+          showLine: true,
+          fill: false,
+          data: {{ player1Data }},
+          borderColor: 'rgba(0, 200, 0, 1)'
+          },
+        {
+          //label: {{ player2 }},
+          showLine: true,
+          fill: false,
+          data: {{ player2Data }},
+          borderColor: 'rgba(200, 0, 0, 1)'
+          }
+        ]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white'}
+        },
+        x: {
+          ticks: { color: 'white'}
         }
       }
-    });
+    }
+  });
     const ctx1 = document.getElementById('valuable-clubs-chart');
 
     new Chart(ctx1, {
@@ -75,13 +90,17 @@
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white'}
+        },
+        x: {
+          ticks: { color: 'white'}
         }
       }
-    });
+    }
+  });
   </script>
 
 {% endblock %}

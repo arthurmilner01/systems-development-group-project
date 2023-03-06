@@ -36,19 +36,22 @@
       labels: ['Current Value', 'Value After Future Game 1', 'Value After Future Game 2', 'Value After Future Game 3', 'Value After Future Game 4', 'Value After Future Game 5'],
       datasets: [{
         label: 'Club Value in £',
-        borderColor: "#FFFFFF",
         data: {{ clubValues }},
         borderWidth: 1
       }]
     },
     options: {
-      scales: {
-        y: {
-          beginAtZero: false
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: 'white'}
+          },
+          x: {
+            ticks: { color: 'white'}
+          }
         }
       }
-    }
-  });
+    });
 
 </script>
 
