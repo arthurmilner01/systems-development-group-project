@@ -12,17 +12,44 @@
               <h5 class="card-title">Photo of {{clubID}}</h5>
               <p class="card-text" style="font-size:0.8em;">
                 {{ clubData[1] }} is a club based in {{clubData[2]}}, managed by {{clubData[3]}}.
-                Players: {{players}}
               </p>
           </div>
       </div>
       <div class="card text-white bg-dark mb-3" style="width: 50%; margin-right: 5%; margin-left: 5%;">
-          <canvas id="club-prices-chart" width="720", height="366"></canvas>
+          <canvas id="club-value-chart" width="720", height="366"></canvas>
       </div>
   </div>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+  const ctx = document.getElementById('club-value-chart');
+  
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Current Value', 'Value After Future Game 1', 'Value After Future Game 2', 'Value After Future Game 3', 'Value After Future Game 4', 'Value After Future Game 5'],
+      datasets: [{
+        label: 'Club Value in £',
+        borderColor: "#FFFFFF",
+        data: {{ clubValues }},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+
+</script>
 
 {% endblock %}
