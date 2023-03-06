@@ -50,7 +50,12 @@ def players():
 @app.route("/clubs") #Route for the clubs page        
 def clubs():
    print("Clubs")
-   return render_template("clubs.html", clubHeadings = clubHeadings)
+   with sqlite3.connect('MoneyballDB.db') as conn:      
+      cur = conn.cursor()
+      cur.execute("SELECT * FROM Clubs")
+      clubData = cur.fetchall()
+   conn.close()
+   return render_template("clubs.html", clubHeadings = clubHeadings, clubData=clubData)
 
 @app.route("/players/<playerID>")
 def playerDetails(playerID):
@@ -109,6 +114,13 @@ def playerDetails(playerID):
                            playerStartOfContract = playerStartOfContract, playerContractDuration = playerContractDuration,\
                            playerGamesPlayedThisYear = playerGamesPlayedThisYear, playerGamesWon = playerGamesWon, playerFutureGames = playerFutureGames,\
                            playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices)
+
+@app.route("/clubs/<clubID>")
+def clubDetails(clubID):
+   print("Club Details")
+   print(clubID)
+   
+   return render_template('clubdetails.html', clubID = clubID)
 
 
 if __name__ == "__main__":
