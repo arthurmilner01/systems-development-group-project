@@ -46,6 +46,7 @@ CREATE TABLE Clubs
 (club_ID INTEGER PRIMARY KEY, club_name varchar(120) UNIQUE NOT NULL, club_location varchar(120) NOT NULL, club_manager varchar(120) NOT NULL)
 ''')
 
+checkedClubs = []
 for player in playerData:
     playerFutureGames = ''
     for i in range(12, 17):
@@ -56,5 +57,15 @@ for player in playerData:
     games_won, future_games)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
     cur.execute(query, (player[0], player[1], player[2], player[3], player[4], player[5], player[6], player[7], player[8], player[9], player[10], player[11], playerFutureGames))
+
+    if player[4] not in checkedClubs:
+        checkedClubs.append(player[4])
+        query = """
+        INSERT INTO Clubs(club_name, club_location, club_manager)
+        VALUES (?, ?, ?)
+        """
+        cur.execute(query, (player[4], player[5], player[6]))
+
+
 
 conn.commit()
