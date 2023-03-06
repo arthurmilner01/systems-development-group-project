@@ -25,6 +25,22 @@ def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, pla
       playerPrices.append(priceAfterGame)
    return playerPrices
 
+def getWeeksLeftInContract(playerStartOfContract, playerContractDuration):
+   #Get current date in desired format
+   currentDate = datetime.now()
+   currentDate = currentDate.strftime("%d/%m/%Y")
+   currentDate = datetime.strptime(currentDate, "%d/%m/%Y")
+   #Get start of contract in desired format
+   playerStartOfContractAsDate = datetime.strptime(playerStartOfContract, '%d/%m/%Y')
+   #Get the weeks the player has already played of his contract
+   playerWeeksPlayedOfContract = (currentDate - playerStartOfContractAsDate).days
+   playerWeeksPlayedOfContract = playerWeeksPlayedOfContract // 7
+   #Get the weeks the player has over his entire contract
+   playerWeeksInContract = ((playerContractDuration * 365) // 7)
+   #Find the difference between them for the remaining weeks in players contract
+   playerWeeksLeftInContract = playerWeeksInContract - playerWeeksPlayedOfContract
+   return playerWeeksLeftInContract
+
 @app.route("/home") #Route for the about us page
 @app.route("/")        
 def home():
@@ -75,42 +91,27 @@ def playerDetails(playerID):
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
       cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID,))
-      playerInfo = cur.fetchall()
+      playerInfo = cur.fetchone()
       print(playerInfo)
-      playerName = playerInfo[0][1]
-      playerDoB = playerInfo[0][2]
-      playerGender = playerInfo[0][3]
-      playerDateSignedUp = playerInfo[0][4]
-      playerCurrentTeam = playerInfo[0][5]
-      playerSalary = playerInfo[0][6]
-      playerStartOfContract = playerInfo[0][7]
-      playerContractDuration = playerInfo[0][8]
-      playerGamesPlayedThisYear = playerInfo[0][9]
-      playerGamesWon = playerInfo[0][10]
-      playerFutureGames = playerInfo[0][11]
+      playerName = playerInfo[1]
+      playerDoB = playerInfo[2]
+      playerGender = playerInfo[3]
+      playerDateSignedUp = playerInfo[4]
+      playerCurrentTeam = playerInfo[5]
+      playerSalary = playerInfo[6]
+      playerStartOfContract = playerInfo[7]
+      playerContractDuration = playerInfo[8]
+      playerGamesPlayedThisYear = playerInfo[9]
+      playerGamesWon = playerInfo[10]
+      playerFutureGames = playerInfo[11]
       cur.execute("SELECT club_location, club_manager FROM Clubs WHERE club_name = ?", (playerCurrentTeam, ))
-      clubInfo = cur.fetchall()
-      playerTeamLocation = clubInfo[0][0]
-      playerTeamManager = clubInfo[0][1]
+      clubInfo = cur.fetchone()
+      playerTeamLocation = clubInfo[0]
+      playerTeamManager = clubInfo[1]
    #Convert salary to value in thousands (e.g. 50 becomes 50000)
    playerSalary = int(playerSalary) * 1000
    print(playerSalary)
-   #Get current date in desired format
-   currentDate = datetime.now()
-   currentDate = currentDate.strftime("%d/%m/%Y")
-   currentDate = datetime.strptime(currentDate, "%d/%m/%Y")
-   #Get start of contract in desired format
-   playerStartOfContractAsDate = datetime.strptime(playerStartOfContract, '%d/%m/%Y')
-   #Get the weeks the player has already played of his contract
-   playerWeeksPlayedOfContract = (currentDate - playerStartOfContractAsDate).days
-   playerWeeksPlayedOfContract = playerWeeksPlayedOfContract // 7
-   #Get the weeks the player has over his entire contract
-   playerWeeksInContract = ((playerContractDuration * 365) // 7)
-   print(playerWeeksInContract)
-   print(playerWeeksPlayedOfContract)
-   #Find the difference between them for the remaining weeks in players contract
-   playerWeeksLeftInContract = playerWeeksInContract - playerWeeksPlayedOfContract
-   print(playerWeeksLeftInContract)
+   playerWeeksLeftInContract = getWeeksLeftInContract(playerStartOfContract, playerContractDuration)
    #Get price of player and price after each future game
    playerPrices = calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames)
    print(playerPrices)
@@ -130,8 +131,19 @@ def playerDetails(playerID):
 def clubDetails(clubID):
    print("Club Details")
    print(clubID)
-   
-   return render_template('clubdetails.html', clubID = clubID)
+   with sqlite3.connect('MoneyballDB.db') as conn:      
+      cur = conn.cursor()
+      cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubID,))
+      clubData = cur.fetchone()      
+      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played, games_won, future_games FROM Players WHERE current_team = ?", (clubID,))
+      players = cur.fetchall()
+      conn.close()
+   clubValues = []
+   for player in players:
+      pass
+
+
+   return render_template('clubdetails.html', clubID = clubID, clubData = clubData, players = players)
 
 
 if __name__ == "__main__":
