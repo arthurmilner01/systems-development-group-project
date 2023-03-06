@@ -47,10 +47,21 @@ def home():
    print("Home")
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Players ORDER BY RANDOM()")
-      playerToWatch = cur.fetchone()
+      cur.execute('''SELECT * FROM Players ORDER BY RANDOM() LIMIT 5''')
+      data = cur.fetchall()
    conn.close()
-   return render_template("home.html", playerToWatch = playerToWatch)
+   #Get current date in desired format
+   currentDate = datetime.now()
+   currentDate = currentDate.strftime("%d/%m/%Y")
+   currentDate = datetime.strptime(currentDate, "%d/%m/%Y")
+   trendingPlayers = []
+   for i in range(5):
+      playerWeeksLeftInContract = getWeeksLeftInContract(data[i][7], data[i][8])
+      trendingPlayers.append(calculatePrices(data[i][6], data[i][10], playerWeeksLeftInContract, data[i][9], data[i][11]))
+      for j in range(len(trendingPlayers[i])):
+         trendingPlayers[i][j] = round(trendingPlayers[i][j], 2)
+   print(trendingPlayers)
+   return render_template("home.html", data = trendingPlayers[0], playerToWatch = data[0])
 
 @app.route("/players") #Route for the players page        
 def players():
