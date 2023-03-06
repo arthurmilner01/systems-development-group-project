@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 
-playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Team Location', 'Team Manager', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
+playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
 clubHeadings = ['Club Name', 'Club Location', 'Club Manager']
 
 def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames):
@@ -66,14 +66,16 @@ def playerDetails(playerID):
       playerGender = playerInfo[0][3]
       playerDateSignedUp = playerInfo[0][4]
       playerCurrentTeam = playerInfo[0][5]
-      playerTeamLocation = playerInfo[0][6]
-      playerTeamManager = playerInfo[0][7]
-      playerSalary = playerInfo[0][8]
-      playerStartOfContract = playerInfo[0][9]
-      playerContractDuration = playerInfo[0][10]
-      playerGamesPlayedThisYear = playerInfo[0][11]
-      playerGamesWon = playerInfo[0][12]
-      playerFutureGames = playerInfo[0][13]
+      playerSalary = playerInfo[0][6]
+      playerStartOfContract = playerInfo[0][7]
+      playerContractDuration = playerInfo[0][8]
+      playerGamesPlayedThisYear = playerInfo[0][9]
+      playerGamesWon = playerInfo[0][10]
+      playerFutureGames = playerInfo[0][11]
+      cur.execute("SELECT club_location, club_manager FROM Clubs WHERE club_name = ?", (playerCurrentTeam, ))
+      clubInfo = cur.fetchall()
+      playerTeamLocation = clubInfo[0][0]
+      playerTeamManager = clubInfo[0][1]
    #Convert salary to value in thousands (e.g. 50 becomes 50000)
    playerSalary = int(playerSalary) * 1000
    print(playerSalary)
