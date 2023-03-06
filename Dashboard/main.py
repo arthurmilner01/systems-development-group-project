@@ -64,23 +64,23 @@ def playerDetails(playerID):
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
       cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID,))
-      playerInfo = cur.fetchall()
+      playerInfo = cur.fetchone()
       print(playerInfo)
-      playerName = playerInfo[0][1]
-      playerDoB = playerInfo[0][2]
-      playerGender = playerInfo[0][3]
-      playerDateSignedUp = playerInfo[0][4]
-      playerCurrentTeam = playerInfo[0][5]
-      playerSalary = playerInfo[0][6]
-      playerStartOfContract = playerInfo[0][7]
-      playerContractDuration = playerInfo[0][8]
-      playerGamesPlayedThisYear = playerInfo[0][9]
-      playerGamesWon = playerInfo[0][10]
-      playerFutureGames = playerInfo[0][11]
+      playerName = playerInfo[1]
+      playerDoB = playerInfo[2]
+      playerGender = playerInfo[3]
+      playerDateSignedUp = playerInfo[4]
+      playerCurrentTeam = playerInfo[5]
+      playerSalary = playerInfo[6]
+      playerStartOfContract = playerInfo[7]
+      playerContractDuration = playerInfo[8]
+      playerGamesPlayedThisYear = playerInfo[9]
+      playerGamesWon = playerInfo[10]
+      playerFutureGames = playerInfo[11]
       cur.execute("SELECT club_location, club_manager FROM Clubs WHERE club_name = ?", (playerCurrentTeam, ))
-      clubInfo = cur.fetchall()
-      playerTeamLocation = clubInfo[0][0]
-      playerTeamManager = clubInfo[0][1]
+      clubInfo = cur.fetchone()
+      playerTeamLocation = clubInfo[0]
+      playerTeamManager = clubInfo[1]
    #Convert salary to value in thousands (e.g. 50 becomes 50000)
    playerSalary = int(playerSalary) * 1000
    print(playerSalary)
