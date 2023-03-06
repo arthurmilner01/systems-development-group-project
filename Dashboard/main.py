@@ -31,10 +31,10 @@ def home():
    print("Home")
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Players")
-      data = cur.fetchall()
+      cur.execute("SELECT * FROM Players ORDER BY RANDOM()")
+      playerToWatch = cur.fetchone()
    conn.close()
-   return render_template("home.html", data = data[0])
+   return render_template("home.html", playerToWatch = playerToWatch)
 
 @app.route("/players") #Route for the players page        
 def players():
