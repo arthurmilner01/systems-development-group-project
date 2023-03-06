@@ -96,6 +96,9 @@ def playerDetails(playerID):
    #Get price of player and price after each future game
    playerPrices = calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames)
    print(playerPrices)
+   for i in range(len(playerPrices)):
+      playerPrices[i] = round(playerPrices[i], 2)
+   print(playerPrices)
 
    conn.close()
    return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerDoB = playerDoB,\
