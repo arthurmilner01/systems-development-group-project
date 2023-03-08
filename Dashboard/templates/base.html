@@ -19,7 +19,7 @@
 <body>
   <nav class="sidebar">
 
-    <img id="logo" src="{{ url_for('static', filename='images/logo.png')}}" alt="Company Logo" width="100%">
+    <img id="logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo" width="100%">
     <a {% block home %}{% endblock %} href="{{ url_for('home') }}"><i class="fa fa-fw fa-home"></i>Home</a>
     <a {% block players %}{% endblock %} href="{{ url_for('players') }}"><i class="fa fa-fw fa-user"></i>Players</a>
     <a {% block clubs %}{% endblock %} href="{{ url_for('clubs') }}"><i class="fa fa-fw fa-shield"></i>Clubs</a>
