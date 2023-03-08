@@ -47,17 +47,43 @@
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['CP', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5'],
         datasets: [{
-          label: 'Market Value in £',
-          data: {{ data }},
+          label: "{{ name1 }}",
+          //borderColor: "#FFFFFF",
+          data: {{ player1 }},
           borderWidth: 1
-        }]
+        },
+        {
+          label: '{{ name2 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player2 }},
+          borderWidth: 1
+        },
+        {
+          label: '{{ name3 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player3 }},
+          borderWidth: 1
+        },
+        {
+          label: '{{ name4 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player4 }},
+          borderWidth: 1
+        },
+        {
+          label: '{{ name5 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player5 }},
+          borderWidth: 1
+        },
+        ]
       },
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: false
           }
         }
       }
