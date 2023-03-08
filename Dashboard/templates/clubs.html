@@ -20,9 +20,9 @@
         <tr>
           {% for j in c %}
               {% if loop.index == 2 %}
-                <th scope="row"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></th>
+                <td scope="row"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></td>
               {% else %}
-                <th scope="row">{{j}}</th>
+                <td scope="row">{{j}}</td>
               {% endif %}
           {% endfor %}
         </tr>

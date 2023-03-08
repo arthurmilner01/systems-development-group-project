@@ -6,7 +6,9 @@
 <div class="content">
     <h1 class="page-title">Players</h1>
 
-    <table class="table table-hover table-striped table-dark" style="color:#ffff">
+    <input type="text" id="seach-player-input" onkeyup="playerSearch()" placeholder="Search players by name..">
+
+    <table class="table table-hover table-striped table-dark" id="players-table" style="color:#ffff">
       <thead>
         <tr>
           {% for col in playerHeadings %}
@@ -19,11 +21,11 @@
         <tr>
           {% for j in p %}
               {% if loop.index == 2 %}
-                <th scope="row"><a href="{{ url_for('playerDetails', playerName=j) }}">{{j}}</a></th>
+                <td scope="row"><a href="{{ url_for('playerDetails', playerName=j) }}">{{j}}</a></td>
               {%elif loop.index == 6 %}
-                <th scope="row"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></th>
+                <td scope="row"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></td>
               {% else %}
-                <th scope="row">{{j}}</th>
+                <td scope="row">{{j}}</td>
               {% endif %}
           {% endfor %}
         </tr>
@@ -31,7 +33,6 @@
       </tbody>
     </table>
 </div>
-
 
 
 {% endblock %}
