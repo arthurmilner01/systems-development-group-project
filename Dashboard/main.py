@@ -43,7 +43,7 @@ def getWeeksLeftInContract(playerStartOfContract, playerContractDuration):
    playerWeeksLeftInContract = playerWeeksInContract - playerWeeksPlayedOfContract
    return playerWeeksLeftInContract
 
-@app.route("/home") #Route for the about us page
+@app.route("/home") #Route for the home page
 @app.route("/")        
 def home():
    print("Home")
@@ -53,18 +53,14 @@ def home():
       data = cur.fetchall()
    conn.close()
    trendingPlayers = []
-   player1 = data[0][1]
-   player2 = data[1][1]
-   player3 = data[2][1]
-   player4 = data[3][1]
-   player5 = data[4][1]
    for i in range(5):
       playerWeeksLeftInContract = getWeeksLeftInContract(data[i][7], data[i][8])
-      trendingPlayers.append(calculatePrices(data[i][6]*1000, data[i][10], playerWeeksLeftInContract, data[i][9], data[i][11]))
+      trendingPlayers.append(calculatePrices((data[i][6])*1000, data[i][10], playerWeeksLeftInContract, data[i][9], data[i][11]))
       for j in range(len(trendingPlayers[i])):
          trendingPlayers[i][j] = round(trendingPlayers[i][j], 2)
+   print(trendingPlayers)
    print(trendingPlayers[0])
-   return render_template("home.html", player1Data = trendingPlayers[0], player2Data = trendingPlayers[1], playerToWatch = data[0], player1 = player1, player2 = player2, player3 = player3, player4 = player4, player5 = player5)
+   return render_template("home.html", name1 = data[0][1], name2 = data[1][1], name3 = data[2][1], name4 = data[3][1], name5 = data[4][1], player1 = trendingPlayers[0], player2 = trendingPlayers[1], player3 = trendingPlayers[2], player4 = trendingPlayers[3], player5 = trendingPlayers[4], playerToWatch = data[0])
 
 @app.route("/players") #Route for the players page        
 def players():

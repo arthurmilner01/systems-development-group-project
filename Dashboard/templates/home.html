@@ -44,38 +44,49 @@
     const ctx = document.getElementById('trending-players-chart');
   
     new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: {
-        //labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
-        dataset: [
+        labels: ['CP', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5'],
+        datasets: [{
+          label: "{{ name1 }}",
+          //borderColor: "#FFFFFF",
+          data: {{ player1 }},
+          borderWidth: 1
+        },
         {
-          //label: {{ player1 }},
-          showLine: true,
-          fill: false,
-          data: {{ player1Data }},
-          borderColor: 'rgba(0, 200, 0, 1)'
-          },
+          label: '{{ name2 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player2 }},
+          borderWidth: 1
+        },
         {
-          //label: {{ player2 }},
-          showLine: true,
-          fill: false,
-          data: {{ player2Data }},
-          borderColor: 'rgba(200, 0, 0, 1)'
-          }
+          label: '{{ name3 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player3 }},
+          borderWidth: 1
+        },
+        {
+          label: '{{ name4 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player4 }},
+          borderWidth: 1
+        },
+        {
+          label: '{{ name5 }}',
+          //borderColor: "#FFFFFF",
+          data: {{ player5 }},
+          borderWidth: 1
+        },
         ]
       },
       options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { color: 'white'}
-        },
-        x: {
-          ticks: { color: 'white'}
+        scales: {
+          y: {
+            beginAtZero: false
+          }
         }
       }
-    }
-  });
+    });
     const ctx1 = document.getElementById('valuable-clubs-chart');
 
     new Chart(ctx1, {
