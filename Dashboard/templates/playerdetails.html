@@ -49,7 +49,7 @@
         title: {
           display: true, 
           color: 'white',
-          text: 'Test'
+          text: 'Change in Players Market value (£) over their 5 Future Games'
         },
         legend:{
           // cursor:"pointer",
@@ -71,11 +71,17 @@
         y: {
           beginAtZero: false,
           ticks: { color: 'white'},
-          crosshair: {  enabled: true }
+          crosshair: {  enabled: true },
+          grid: {
+            color: 'black'
+          }
         },
         x: {
           ticks: { color: 'white'},
-          crosshair: {  enabled: true, snapToDataPoint: true }
+          crosshair: {  enabled: true, snapToDataPoint: true },
+          grid: {
+            color: 'black'
+          }
         },
       }
     }
