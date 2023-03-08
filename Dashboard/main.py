@@ -58,9 +58,42 @@ def home():
       trendingPlayers.append(calculatePrices((data[i][6])*1000, data[i][10], playerWeeksLeftInContract, data[i][9], data[i][11]))
       for j in range(len(trendingPlayers[i])):
          trendingPlayers[i][j] = round(trendingPlayers[i][j], 2)
-   print(trendingPlayers)
-   print(trendingPlayers[0])
-   return render_template("home.html", name1 = data[0][1], name2 = data[1][1], name3 = data[2][1], name4 = data[3][1], name5 = data[4][1], player1 = trendingPlayers[0], player2 = trendingPlayers[1], player3 = trendingPlayers[2], player4 = trendingPlayers[3], player5 = trendingPlayers[4], playerToWatch = data[0])
+   with sqlite3.connect('MoneyballDB.db') as conn:      
+      cur = conn.cursor()
+      cur.execute("SELECT * FROM Clubs")
+      clubData = cur.fetchall()
+      playersByClub = []
+      for club in clubData:    
+         cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games FROM Players WHERE current_team = ?", (club[1],))
+         players = cur.fetchall()
+         players.append(club[1])
+         playersByClub.append(players) 
+      clubs = []
+      for club in playersByClub:
+         print(club)
+         clubValues = [0,0,0,0,0,0, club[-1]]
+         for i in range(len(club)-1):
+            playerWeeksLeftInContract = getWeeksLeftInContract(club[i][2], club[i][3])
+            playerPrices = calculatePrices((club[i][1] * 1000), club[i][5], playerWeeksLeftInContract, club[i][4], club[i][6])
+            for i in range(len(playerPrices)):
+               clubValues[i] = clubValues[i] + round(playerPrices[i])
+         clubs.append(clubValues)
+      clubs = sorted(clubs)
+      clubs = clubs[-6:]
+      week0 = []
+      week1 = []
+      week2 = []
+      week3 = []
+      week4 = []
+      week5 = []
+      for club in clubs:
+         week0.append(club[0])
+         week1.append(club[1])
+         week2.append(club[2])
+         week3.append(club[3])
+         week4.append(club[4])
+         week5.append(club[5])  
+   return render_template("home.html", name1 = data[0][1], name2 = data[1][1], name3 = data[2][1], name4 = data[3][1], name5 = data[4][1], player1 = trendingPlayers[0], player2 = trendingPlayers[1], player3 = trendingPlayers[2], player4 = trendingPlayers[3], player5 = trendingPlayers[4], playerToWatch = data[0], week0 = week0, week1 = week1, week2 = week2, week3 = week3, week4 = week4, week5 = week5, club1 = clubs[0][6], club2 = clubs[1][6], club3 = clubs[2][6], club4 = clubs[3][6], club5 = clubs[4][6], club6 = clubs[5][6])
 
 @app.route("/players") #Route for the players page        
 def players():

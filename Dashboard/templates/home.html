@@ -7,15 +7,15 @@
     <h1 class="page-title">Home</h1>
     <div class="center-homepage">
         <div class="row">
-            <div class="card text-white bg-dark mb-3" style="width: 30%; margin-right: 10%; margin-left: 10%;">
-                <canvas id="trending-players-chart" width="720", height="366"></canvas>
+            <div class="card text-white bg-dark mb-3" style="width: 40%; margin-right: 5%; margin-left: 5%;">
+                <canvas id="trending-players-chart" width="720", height="500"></canvas>
                 <div class="card-body">
                     <h5 class="card-title">Trending Players</h5>
                     <p class="card-text">Graph showing the players with the highest potential change in value.</p>
                 </div>
             </div>
-            <div class="card text-white bg-dark mb-3" style="width: 30%; margin-right: 10%; margin-left: 10%;">
-                <canvas id="valuable-clubs-chart" width="720", height="366"></canvas>
+            <div class="card text-white bg-dark mb-3" style="width: 40%; margin-right: 5%; margin-left: 5%;">
+                <canvas id="valuable-clubs-chart" width="720", height="500"></canvas>
                 <div class="card-body">
                     <h5 class="card-title">Most Valuable Clubs</h5>
                     <p class="card-text">Graph showing the clubs with the highest current value (based on the value of the clubs players).</p>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="card-horizontal text-white bg-dark mb-6" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+            <div class="card-horizontal text-white bg-dark mb-6" style="width: 90%; margin-left: 5%; margin-right: 5%;">
                 <div class="img-square-wrapper" style="float:left;">
                     <img class="" src="http://via.placeholder.com/225x250" alt="Graph showing player price following 5 future games.">
                 </div>
@@ -82,7 +82,17 @@
       options: {
         scales: {
           y: {
-            beginAtZero: false
+            beginAtZero: false,
+            ticks: { color: 'white'},
+            grid: {
+            color: 'black'
+          }
+          },
+          x: {
+            ticks: { color: 'white'},
+            grid: {
+            color: 'black'
+          }
           }
         }
       }
@@ -92,10 +102,35 @@
     new Chart(ctx1, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['{{ club1 }}', '{{ club2 }}', '{{ club3 }}', '{{ club4 }}', '{{ club5 }}', '{{ club6 }}'],
         datasets: [{
-          label: '# of Votes',
-          data: [8, 9, 3, 5, 2, 3],
+          label: "CP",
+          data: {{ week0 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG1",
+          data: {{ week1 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG2",
+          data: {{ week2 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG3",
+          data: {{ week3 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG4",
+          data: {{ week4 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG5",
+          data: {{ week5 }},
           borderWidth: 1
         }]
       },
@@ -103,10 +138,16 @@
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { color: 'white'}
+          ticks: { color: 'white'},
+          grid: {
+            color: 'black'
+          }
         },
         x: {
-          ticks: { color: 'white'}
+          ticks: { color: 'white'},
+          grid: {
+            color: 'black'
+          }
         }
       }
     }
