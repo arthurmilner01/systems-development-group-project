@@ -92,10 +92,35 @@
     new Chart(ctx1, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['{{ club1 }}', '{{ club2 }}', '{{ club3 }}', '{{ club4 }}', '{{ club5 }}', '{{ club6 }}'],
         datasets: [{
-          label: '# of Votes',
-          data: [8, 9, 3, 5, 2, 3],
+          label: "CP",
+          data: {{ week0 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG1",
+          data: {{ week1 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG2",
+          data: {{ week2 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG3",
+          data: {{ week3 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG4",
+          data: {{ week4 }},
+          borderWidth: 1
+        },
+        {
+          label: "FG5",
+          data: {{ week5 }},
           borderWidth: 1
         }]
       },
