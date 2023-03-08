@@ -82,7 +82,17 @@
       options: {
         scales: {
           y: {
-            beginAtZero: false
+            beginAtZero: false,
+            ticks: { color: 'white'},
+            grid: {
+            color: 'black'
+          }
+          },
+          x: {
+            ticks: { color: 'white'},
+            grid: {
+            color: 'black'
+          }
           }
         }
       }
@@ -103,10 +113,16 @@
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { color: 'white'}
+          ticks: { color: 'white'},
+          grid: {
+            color: 'black'
+          }
         },
         x: {
-          ticks: { color: 'white'}
+          ticks: { color: 'white'},
+          grid: {
+            color: 'black'
+          }
         }
       }
     }

@@ -34,23 +34,55 @@
   
   new Chart(ctx, {
     type: 'line',
+    markerType: "square",
     data: {
       labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
+      showInLegend: true,
       datasets: [{
         label: 'Market Value in £',
         data: {{ playerPrices }},
-        borderWidth: 1
+        borderWidth: 1,
       }]
     },
     options: {
+      plugins: {
+        title: {
+          display: true, 
+          color: 'white',
+          text: 'Change in Players Market value (£) over their 5 Future Games'
+        },
+        legend:{
+          // cursor:"pointer",
+          // verticalAlign: "bottom",
+          // horizontalAlign: "left",
+          // dockInsidePlotArea: true,
+        }
+      },
+      toolTip:{
+        shared:true
+      },
+      // legend:{
+      //   cursor:"pointer",
+      //   verticalAlign: "bottom",
+      //   horizontalAlign: "left",
+      //   dockInsidePlotArea: true,
+      // },
       scales: {
         y: {
           beginAtZero: false,
-          ticks: { color: 'white'}
+          ticks: { color: 'white'},
+          crosshair: {  enabled: true },
+          grid: {
+            color: 'black'
+          }
         },
         x: {
-          ticks: { color: 'white'}
-        }
+          ticks: { color: 'white'},
+          crosshair: {  enabled: true, snapToDataPoint: true },
+          grid: {
+            color: 'black'
+          }
+        },
       }
     }
   });
