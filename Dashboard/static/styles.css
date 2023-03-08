@@ -1,3 +1,8 @@
+/* CSS for whole webpage */
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
 /*CSS for the logo on the sidebar */
  #logo{
     max-width: 150px;
@@ -60,3 +65,12 @@
     padding: 5%;
     text-align: center;
   }
+
+  /* CSS for tables */
+.table a{
+  color: #ffff;
+}
+
+.table a:hover{
+  color: #888787;
+}

@@ -28,8 +28,7 @@
                     <img class="" src="http://via.placeholder.com/225x250" alt="Graph showing player price following 5 future games.">
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Player to Watch</h4>
-                    <p class="card-text">{{ playerToWatch[1] }}:</p>
+                    <h4 class="card-title">Player to Watch<br><br></h4>
                     <p class="card-text">{{ playerToWatch[1] }} playing for {{ playerToWatch[5] }} is expected to get {{ playerToWatch[11] }} in his next five games.
                       <br><br>Could this be a great deal for any interested clubs following this potential form?
                     </p>
@@ -101,13 +100,17 @@
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white'}
+        },
+        x: {
+          ticks: { color: 'white'}
         }
       }
-    });
+    }
+  });
   </script>
 
 {% endblock %}

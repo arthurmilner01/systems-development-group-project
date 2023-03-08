@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
-clubHeadings = ['Club Name', 'Club Location', 'Club Manager']
+clubHeadings = ['Club ID', 'Club Name', 'Club Location', 'Club Manager']
 
 def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, playerGamesPlayedThisYear, playerFutureGames):
    playerPrices = []
@@ -17,8 +17,10 @@ def calculatePrices(playerSalary, playerGamesWon, playerWeeksLeftInContract, pla
       if playerFutureGames[i] == 'W':
          playerGamesWon += 1
          playerGamesPlayedThisYear += 1
+         playerWeeksLeftInContract -= 1
       else:
          playerGamesPlayedThisYear += 1
+         playerWeeksLeftInContract -= 1
 
       newWinRate = playerGamesWon / playerGamesPlayedThisYear
       priceAfterGame = playerSalary * playerWeeksLeftInContract * newWinRate
@@ -51,6 +53,11 @@ def home():
       data = cur.fetchall()
    conn.close()
    trendingPlayers = []
+   player1 = data[0][1]
+   player2 = data[1][1]
+   player3 = data[2][1]
+   player4 = data[3][1]
+   player5 = data[4][1]
    for i in range(5):
       playerWeeksLeftInContract = getWeeksLeftInContract(data[i][7], data[i][8])
       trendingPlayers.append(calculatePrices((data[i][6])*1000, data[i][10], playerWeeksLeftInContract, data[i][9], data[i][11]))
@@ -81,13 +88,13 @@ def clubs():
    conn.close()
    return render_template("clubs.html", clubHeadings = clubHeadings, clubData=clubData)
 
-@app.route("/players/<playerID>")
-def playerDetails(playerID):
+@app.route("/players/<playerName>")
+def playerDetails(playerName):
    print("Player Details")
-   print(playerID)
+   print(playerName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Players WHERE player_ID = ?", (playerID,))
+      cur.execute("SELECT * FROM Players WHERE player_name = ?", (playerName,))
       playerInfo = cur.fetchone()
       print(playerInfo)
       playerName = playerInfo[1]
@@ -117,30 +124,35 @@ def playerDetails(playerID):
    print(playerPrices)
 
    conn.close()
-   return render_template('playerdetails.html', playerID = playerID, playerName = playerName, playerDoB = playerDoB,\
+   return render_template('playerdetails.html', playerName = playerName, playerDoB = playerDoB,\
                            playerGender = playerGender, playerDateSignedUp = playerDateSignedUp, playerCurrentTeam = playerCurrentTeam,\
                            playerTeamLocation = playerTeamLocation, playerTeamManager = playerTeamManager, playerSalary = playerSalary,\
                            playerStartOfContract = playerStartOfContract, playerContractDuration = playerContractDuration,\
                            playerGamesPlayedThisYear = playerGamesPlayedThisYear, playerGamesWon = playerGamesWon, playerFutureGames = playerFutureGames,\
                            playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices)
 
-@app.route("/clubs/<clubID>")
-def clubDetails(clubID):
+@app.route("/clubs/<clubName>")
+def clubDetails(clubName):
    print("Club Details")
-   print(clubID)
+   print(clubName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubID,))
+      cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubName,))
       clubData = cur.fetchone()      
-      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played, games_won, future_games FROM Players WHERE current_team = ?", (clubID,))
+      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games FROM Players WHERE current_team = ?", (clubName,))
       players = cur.fetchall()
-      conn.close()
-   clubValues = []
-   for player in players:
-      pass
+      clubValues = [0,0,0,0,0,0]
+      for player in players:
+         playerWeeksLeftInContract = getWeeksLeftInContract(player[2], player[3])
+         playerPrices = calculatePrices((player[1] * 1000), player[5], playerWeeksLeftInContract, player[4], player[6])
+         for i in range(len(playerPrices)):
+            clubValues[i] = clubValues[i] + playerPrices[i]
+      print(clubValues)
+
+   conn.close()
 
 
-   return render_template('clubdetails.html', clubID = clubID, clubData = clubData, players = players)
+   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues)
 
 
 if __name__ == "__main__":
