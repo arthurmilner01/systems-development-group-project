@@ -34,23 +34,36 @@
   
   new Chart(ctx, {
     type: 'line',
+    markerType: "square",
     data: {
       labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
+      showInLegend: true,
       datasets: [{
         label: 'Market Value in £',
         data: {{ playerPrices }},
-        borderWidth: 1
+        borderWidth: 1,
       }]
     },
     options: {
+      toolTip:{
+        shared:true
+      },
+      // legend:{
+      //   cursor:"pointer",
+      //   verticalAlign: "bottom",
+      //   horizontalAlign: "left",
+      //   dockInsidePlotArea: true,
+      // },
       scales: {
         y: {
           beginAtZero: false,
-          ticks: { color: 'white'}
+          ticks: { color: 'white'},
+          crosshair: {  enabled: true }
         },
         x: {
-          ticks: { color: 'white'}
-        }
+          ticks: { color: 'white'},
+          crosshair: {  enabled: true, snapToDataPoint: true }
+        },
       }
     }
   });
