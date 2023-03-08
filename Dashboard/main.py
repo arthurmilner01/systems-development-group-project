@@ -53,11 +53,6 @@ def home():
       data = cur.fetchall()
    conn.close()
    trendingPlayers = []
-   player1 = data[0][1]
-   player2 = data[1][1]
-   player3 = data[2][1]
-   player4 = data[3][1]
-   player5 = data[4][1]
    for i in range(5):
       playerWeeksLeftInContract = getWeeksLeftInContract(data[i][7], data[i][8])
       trendingPlayers.append(calculatePrices((data[i][6])*1000, data[i][10], playerWeeksLeftInContract, data[i][9], data[i][11]))
