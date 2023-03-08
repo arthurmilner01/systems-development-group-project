@@ -137,7 +137,11 @@ def clubDetails(clubName):
       cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games FROM Players WHERE current_team = ?", (clubName,))
       players = cur.fetchall()
       clubValues = [0,0,0,0,0,0]
+      playerSalaries = []
+      playerNames = []
       for player in players:
+         playerSalaries.append((player[1] * 1000))
+         playerNames.append(player[0])
          playerWeeksLeftInContract = getWeeksLeftInContract(player[2], player[3])
          playerPrices = calculatePrices((player[1] * 1000), player[5], playerWeeksLeftInContract, player[4], player[6])
          for i in range(len(playerPrices)):
@@ -147,7 +151,7 @@ def clubDetails(clubName):
    conn.close()
 
 
-   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues)
+   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames )
 
 
 if __name__ == "__main__":

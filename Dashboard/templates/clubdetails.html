@@ -20,6 +20,16 @@
       </div>
   </div>
 
+  <div class="row">
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+        <canvas id="club-salaries-chart" width="720", height="366"></canvas>
+        <div class="card-body">
+            <h4 class="card-title">Club Player Salaries<br><br></h4>
+            <p class="card-text">Graph showing player salaries as a proportion of clubs salary bill.</p>
+        </div>
+    </div>
+  </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -52,6 +62,21 @@
         }
       }
     });
+
+    const ctx1 = document.getElementById('club-salaries-chart');
+  
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Player salaries for this club',
+          data: {{playerSalaries}},
+          hoverOffset: 4
+        }]
+      },
+    }
+    )
 
 </script>
 
