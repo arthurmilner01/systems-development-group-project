@@ -21,14 +21,22 @@
   </div>
 
   <div class="row">
-    <div class="card-horizontal text-white bg-dark mb-6" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 20%; margin-left: 10%; margin-right: 10%;">
         <canvas id="club-salaries-chart" width="720", height="366"></canvas>
         <div class="card-body">
             <h4 class="card-title">Club Player Salaries<br><br></h4>
             <p class="card-text">Graph showing player salaries as a proportion of clubs salary bill.</p>
         </div>
     </div>
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 20%; margin-left: 5%; margin-right: 5%;">
+      <canvas id="club-values-chart" width="720", height="366"></canvas>
+      <div class="card-body">
+          <h4 class="card-title">Club Player Values<br><br></h4>
+          <p class="card-text">Graph showing player values as a proportion of clubs value.</p>
+      </div>
   </div>
+  </div>
+  
 
 </div>
 
@@ -81,8 +89,21 @@
           hoverOffset: 4
         }]
       },
-    }
-    )
+    });
+
+    const ctx2 = document.getElementById('club-values-chart');
+  
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Player salaries for this club',
+          data: {{playerValues}},
+          hoverOffset: 4
+        }]
+      },
+    });
 
 </script>
 
