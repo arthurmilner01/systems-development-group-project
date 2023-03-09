@@ -182,6 +182,8 @@ def clubDetails(clubName):
          for i in range(len(playerPrices)):
             clubValues[i] = clubValues[i] + playerPrices[i]
       print(clubValues)
+      print(playerValues)
+      print(playerNames)
 
    conn.close()
 
