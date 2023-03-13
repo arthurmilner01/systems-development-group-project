@@ -74,6 +74,13 @@
 .table a:hover{
   color: #888787;
 }
+
+button{
+  padding: 0;
+  border: none;
+  background: none;
+  color: #ffff;
+}
 /* 
 
 .sr-only {
