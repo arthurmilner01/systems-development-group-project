@@ -1,6 +1,6 @@
 /* CSS for whole webpage */
 *{
-  cursor:grab;
+  cursor: url(images/Cursor.jpg), pointer;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -26,7 +26,6 @@
   
   /* Sidebar links */
   .sidebar a {
-    cursor:zoom-in;
     display: block;
     color: #ffff;
     padding: 10%;
