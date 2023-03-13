@@ -167,7 +167,7 @@ def clubDetails(clubName):
       cur = conn.cursor()
       cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubName,))
       clubData = cur.fetchone()      
-      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games FROM Players WHERE current_team = ?", (clubName,))
+      cur.execute("SELECT player_name, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games, player_ID FROM Players WHERE current_team = ?", (clubName,))
       players = cur.fetchall()
       clubValues = [0,0,0,0,0,0]
       playerSalaries = []
@@ -175,7 +175,7 @@ def clubDetails(clubName):
       playerValues = []
       for player in players:
          playerSalaries.append((player[1] * 1000))
-         playerNames.append(player[0])
+         playerNames.append(player[7])
          playerWeeksLeftInContract = getWeeksLeftInContract(player[2], player[3])
          playerPrices = calculatePrices((player[1] * 1000), player[5], playerWeeksLeftInContract, player[4], player[6])
          playerValues.append(playerPrices[0])
@@ -184,11 +184,12 @@ def clubDetails(clubName):
       print(clubValues)
       print(playerValues)
       print(playerNames)
+         
 
    conn.close()
 
 
-   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames, playerValues=playerValues  )
+   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames, playerValues=playerValues)
 
 
 if __name__ == "__main__":
