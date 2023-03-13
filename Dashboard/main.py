@@ -192,5 +192,15 @@ def clubDetails(clubName):
    return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames, playerValues=playerValues)
 
 
+@app.route("/login") #Route for the players page        
+def login():
+   print("Login")
+   # with sqlite3.connect('MoneyballDB.db') as conn:      
+   #    cur = conn.cursor()
+   #    cur.execute("SELECT * FROM Players")
+   #    playerData = cur.fetchall()
+   # conn.close()
+   return render_template("login.html")
+
 if __name__ == "__main__":
    app.run(debug = True) #will run the flask app
