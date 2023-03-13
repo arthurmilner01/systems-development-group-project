@@ -31,6 +31,10 @@ cur.execute('''
 DROP TABLE if exists Clubs
 ''')
 
+cur.execute('''
+DROP TABLE if exists Users
+''')
+
 #Creating Tables
 cur.execute('''
 CREATE TABLE Players
@@ -43,6 +47,11 @@ future_games char(5) NOT NULL)
 cur.execute('''
 CREATE TABLE Clubs
 (club_ID INTEGER PRIMARY KEY, club_name varchar(120) UNIQUE NOT NULL, club_location varchar(120) NOT NULL, club_manager varchar(120) NOT NULL)
+''')
+
+cur.execute('''
+CREATE TABLE Users
+(user_ID INTEGER PRIMARY KEY, email varchar(120) UNIQUE NOT NULL, password varchar(120) NOT NULL)
 ''')
 
 checkedClubs = []
@@ -64,6 +73,10 @@ for player in playerData:
         """
         cur.execute(query, (player[4], player[5], player[6]))
 
-
+query = """
+INSERT INTO Users(email, password)
+VALUES(?, ?)
+"""
+cur.execute(query, ("admin@gmail.com", "admin123"))
 
 conn.commit()
