@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, session, flash, redirect, request, url_for
+from flask import Flask, render_template, session, flash, redirect, request, url_for, abort
 from datetime import datetime
 from werkzeug.security import check_password_hash
 
@@ -50,6 +50,12 @@ def checkFirstVisit():
       session["FirstVisit"] = True
    else:
       session["FirstVisit"] = False
+
+def checkLoggedIn():
+   if session.get("currentUserEmail") ==  None: #Redirects to error page if user is not admin
+      print("User not admin, restricting access to this page.")
+      abort(403)
+
 
 @app.route("/home") #Route for the home page
 @app.route("/")        
@@ -247,14 +253,17 @@ def login():
          flash("User successfully logged out.")
          session.pop("currentUserEmail",None)
       return render_template("login.html")
-      
-   return render_template("login.html")
 
 @app.route("/admin")
 def adminpage():
    print("Admin Page")
+   checkLoggedIn()
    checkFirstVisit()
    return render_template("adminpage.html")
+
+@app.errorhandler(403)
+def error403(error):
+   return render_template("403error.html"), 403
 
 if __name__ == "__main__":
    app.run(debug = True) #will run the flask app
