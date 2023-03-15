@@ -1,8 +1,9 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, session, flash, redirect, request, url_for
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = "hello"
 
 
 playerHeadings = ['Player Number','Player Name', 'Date of Birth', 'Gender', 'Date Signed-Up', 'Current Team', 'Salary (£k/Week)', 'Start of Contract', 'Contract Duration', 'Games Played This Year', 'Games Won', 'Future Games']
@@ -43,10 +44,17 @@ def getWeeksLeftInContract(playerStartOfContract, playerContractDuration):
    playerWeeksLeftInContract = playerWeeksInContract - playerWeeksPlayedOfContract
    return playerWeeksLeftInContract
 
+def checkFirstVisit():
+   if session.get("FirstVisit") == None:
+      session["FirstVisit"] = True
+   else:
+      session["FirstVisit"] = False
+
 @app.route("/home") #Route for the home page
 @app.route("/")        
 def home():
    print("Home")
+   checkFirstVisit()
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
       cur.execute('''SELECT * FROM Players ORDER BY RANDOM() LIMIT 5''')
@@ -97,8 +105,8 @@ def home():
 
 @app.route("/players") #Route for the players page        
 def players():
-   
    print("Players")
+   checkFirstVisit()
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
       cur.execute("SELECT * FROM Players")
@@ -199,15 +207,39 @@ def clubDetails(clubName):
    return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames, playerValues1=playerValues1, playerValues2=playerValues2, playerValues3=playerValues3, playerValues4=playerValues4, playerValues5=playerValues5)
 
 
-@app.route("/login") #Route for the players page        
+@app.route("/login", methods=["POST", "GET"]) #Route for the players page        
 def login():
    print("Login")
-   # with sqlite3.connect('MoneyballDB.db') as conn:      
-   #    cur = conn.cursor()
-   #    cur.execute("SELECT * FROM Players")
-   #    playerData = cur.fetchall()
-   # conn.close()
+   if request.method == "POST":
+      email = request.form["adminemail"]
+      password = request.form["adminpassword"]
+      print(email)
+      print(password)
+      with sqlite3.connect('MoneyballDB.db') as conn:      
+         cur = conn.cursor()
+         cur.execute("SELECT * FROM Users WHERE email = ? AND password = ?", (email, password))
+         results = cur.fetchone()
+         if results != None:
+            print("Account Found")
+            session["currentUserEmail"] = email
+            return redirect(url_for("adminpage"))
+         else:
+            print("Account not found.") 
+            flash("Error: Email has not been recognised.")
+            return redirect(url_for("login"))
+   elif request.method == "GET": #Will run when user presses log-out button, this clears the current session variables concerned with being logged-in
+      if session.get("currentUserEmail") != None:
+         print("Clearing session variables.")
+         flash("User successfully logged out.")
+         session.pop("currentUserEmail",None)
+      return render_template("login.html")
+      
    return render_template("login.html")
+
+@app.route("/admin")
+def adminpage():
+   print("Admin Page")
+   return render_template("adminpage.html")
 
 if __name__ == "__main__":
    app.run(debug = True) #will run the flask app
