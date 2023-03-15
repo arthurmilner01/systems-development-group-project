@@ -80,8 +80,18 @@ button{
   padding: 0;
   border: none;
   background: none;
-  color: #ffff;
+  color: white;
 }
+
+/*
+Change colour for when button is pressed
+*/
+
+.button:focus{
+
+  color: red;
+  
+  }
 
 #searchInput{
   margin: 0 auto;
