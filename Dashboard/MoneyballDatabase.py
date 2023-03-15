@@ -1,6 +1,7 @@
 from DatabaseAccess import *
 import csv
 import os
+from werkzeug.security import generate_password_hash
 
 playerData = []
 
@@ -73,10 +74,12 @@ for player in playerData:
         """
         cur.execute(query, (player[4], player[5], player[6]))
 
+password = generate_password_hash("admin123", method="sha256")
+
 query = """
 INSERT INTO Users(email, password)
 VALUES(?, ?)
 """
-cur.execute(query, ("admin@gmail.com", "admin123"))
+cur.execute(query, ("admin@gmail.com", password))
 
 conn.commit()

@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, session, flash, redirect, request, url_for
 from datetime import datetime
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "hello"
@@ -217,12 +218,21 @@ def login():
       print(password)
       with sqlite3.connect('MoneyballDB.db') as conn:      
          cur = conn.cursor()
-         cur.execute("SELECT * FROM Users WHERE email = ? AND password = ?", (email, password))
+         cur.execute("SELECT * FROM Users WHERE email = ?", (email,))
          results = cur.fetchone()
          if results != None:
             print("Account Found")
-            session["currentUserEmail"] = email
-            return redirect(url_for("adminpage"))
+            cur.execute("SELECT password FROM Users WHERE email = ?", (email,))
+            hashedPassword = cur.fetchone()
+            hashedPassword = "".join(hashedPassword)
+            print(hashedPassword)
+            if check_password_hash(hashedPassword, password) == True:
+               session["currentUserEmail"] = email
+               return redirect(url_for("adminpage"))
+            else:
+               print("Incorrect password")
+               flash("Error: Password was incorrect.")
+               return redirect(url_for("login"))
          else:
             print("Account not found.") 
             flash("Error: Email has not been recognised.")
