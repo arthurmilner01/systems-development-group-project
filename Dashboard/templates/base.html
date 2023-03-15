@@ -54,7 +54,7 @@
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 
 {% if session.get("FirstVisit") == True %}
-    <script type="text/javascript">alert("Warning: By using this site you agree to the use of sessions/cookies in order to store data such as account details and user bookings. Please view our privacy statement for more information.");</script>
+    <script type="text/javascript">alert("Warning: By using this site you agree to the use of sessions/cookies in order to store usage data.");</script>
 {% endif %}
 
 </html>
