@@ -118,6 +118,7 @@ def players():
 @app.route("/clubs") #Route for the clubs page        
 def clubs():
    print("Clubs")
+   checkFirstVisit()
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
       cur.execute("SELECT * FROM Clubs")
@@ -128,6 +129,7 @@ def clubs():
 @app.route("/players/<playerName>")
 def playerDetails(playerName):
    print("Player Details")
+   checkFirstVisit()
    print(playerName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
@@ -171,6 +173,7 @@ def playerDetails(playerName):
 @app.route("/clubs/<clubName>")
 def clubDetails(clubName):
    print("Club Details")
+   checkFirstVisit()
    print(clubName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
@@ -211,6 +214,7 @@ def clubDetails(clubName):
 @app.route("/login", methods=["POST", "GET"]) #Route for the players page        
 def login():
    print("Login")
+   checkFirstVisit()
    if request.method == "POST":
       email = request.form["adminemail"]
       password = request.form["adminpassword"]
@@ -249,6 +253,7 @@ def login():
 @app.route("/admin")
 def adminpage():
    print("Admin Page")
+   checkFirstVisit()
    return render_template("adminpage.html")
 
 if __name__ == "__main__":
