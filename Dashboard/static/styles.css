@@ -1,6 +1,6 @@
 /* CSS for whole webpage */
 *{
-  cursor: url(images/Cursor.jpg), pointer;
+  cursor:pointer;
   font-family: 'Roboto', sans-serif;
 }
 
