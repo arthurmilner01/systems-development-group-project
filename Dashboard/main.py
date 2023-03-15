@@ -260,12 +260,21 @@ def login():
          session.pop("currentUserEmail",None)
       return render_template("login.html")
 
-@app.route("/admin")
+@app.route("/admin", methods=["POST", "GET"])
 def adminpage():
    print("Admin Page")
    checkLoggedIn()
    checkFirstVisit()
-   return render_template("adminpage.html")
+   if request.method == "POST":
+      pass
+   elif request.method == "GET": #Will run when user presses log-out button, this clears the current session variables concerned with being logged-in
+      with sqlite3.connect('MoneyballDB.db') as conn: 
+         cur = conn.cursor()
+         cur.execute("SELECT club_name FROM Clubs")
+         clubNameList = cur.fetchall()
+         cur.execute("SELECT player_name FROM Players")
+         playerNameList = cur.fetchall()
+      return render_template("adminpage.html", clubNameList = clubNameList, playerNameList = playerNameList)
 
 @app.errorhandler(403)
 def error403(error):

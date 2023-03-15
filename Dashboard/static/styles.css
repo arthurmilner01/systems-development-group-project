@@ -131,3 +131,17 @@ Change colour for when button is pressed
   font-size: 1.4em;
   background-color: #5c5c5c;
 }
+
+#form-button{
+  width: 30%; 
+  margin-bottom: 5%; 
+  background-color: rgb(54, 54, 54);
+  border: 2px solid #E8E8E8;
+}
+
+#form-entry{
+  width: 50%; 
+  text-align:center; 
+  margin-left: auto; 
+  margin-right:auto;
+}

@@ -5,7 +5,55 @@
 <div class="content">
     <h1 class="page-title">Admin Page</h1>
     <div class="center-homepage">
-       
+        <div class="row">
+            <div class="card text-white bg-dark mb-6" style="width: 90%; margin-right: 5%; margin-left: 5%; margin-bottom: 5%;">
+                <div class="card-body">
+                    <h5 class="card-title">Add Player</h5><br><br>
+                    <input class="form-control" id="form-entry" name="player-name-add" type="text" placeholder="Please enter player name..."><br><br>
+                    <button id="form-button" name="add-player" class="btn btn-primary" type="submit">Add Player</button> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card text-white bg-dark mb-6" style="width: 90%; margin-right: 5%; margin-left: 5%; margin-bottom: 5%;">
+                <div class="card-body">
+                    <h5 class="card-title">Delete Player</h5><br><br>
+                    <select id="form-entry" class="form-select" name="player-name-del" aria-label="Default select example">
+                        <option selected>Select player name from dropdown...</option>
+                        {% for name in playerNameList %}
+                            <option value={{ "".join(name) }}>{{ "".join(name) }}</option>
+                        {% endfor %}
+                    </select><br><br>
+                    <button id="form-button" name="delete-player" class="btn btn-primary" type="submit">Delete Player</button> 
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="card text-white bg-dark mb-6" style="width: 90%; margin-right: 5%; margin-left: 5%; margin-top: 5%;margin-bottom: 5%;">
+                <div class="card-body">
+                    <h5 class="card-title">Add Club</h5><br><br>
+                    <input class="form-control" id="form-entry" name="club-name-add" type="text" placeholder="Please enter club name..."><br><br>
+                    <input class="form-control" id="form-entry" name="club-location-add" type="text" placeholder="Please enter club location..."><br><br>
+                    <input class="form-control" id="form-entry" name="club-manager-add" type="text" placeholder="Please enter club manager..."><br><br>
+                    <button id="form-button" name="add-club" class="btn btn-primary" type="submit">Add Club</button> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card text-white bg-dark mb-6" style="width: 90%; margin-right: 5%; margin-left: 5%;margin-bottom: 5%;">
+                <div class="card-body">
+                    <h5 class="card-title">Delete Club</h5><br><br>
+                    <select id="form-entry" class="form-select" name="club-name-del" aria-label="Default select example">
+                        <option selected>Select club name from dropdown...</option>
+                        {% for name in clubNameList %}
+                            <option value={{ "".join(name) }}>{{ "".join(name) }}</option>
+                        {% endfor %}
+                    </select><br><br>
+                    <button id="form-button" name="delete-club" class="btn btn-primary" type="submit">Delete Club</button> 
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
