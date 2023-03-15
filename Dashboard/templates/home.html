@@ -28,9 +28,15 @@
                     <img class="" src="http://via.placeholder.com/225x250" alt="Graph showing player price following 5 future games.">
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Player to Watch<br><br></h4>
-                    <p class="card-text">{{ playerToWatch[1] }} playing for {{ playerToWatch[5] }} is expected to get {{ playerToWatch[11] }} in his next five games.
-                      <br><br>Could this be a great deal for any interested clubs following this potential form?
+                    <h4 class="card-title">Player(s) to Watch<br><br></h4>
+                    <!-- <p class="card-text">{{ player_name }} playing for {{ playerToWatch[5] }} is expected to get {{ future_games }} in his next five games. -->
+                      <p class="card-text">Based on a future games prediction, the players to watch this week are:</p>
+                      <ul>
+                        {% for result in result %}
+                        <li>{{ result[0] }} with {{ result[1] }}</li>
+                        {% endfor %}
+                      </ul>
+                      <br>Could this be a great deal for any interested clubs following this potential form?
                     </p>
                 </div>
             </div>
