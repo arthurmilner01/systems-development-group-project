@@ -180,24 +180,31 @@ def clubDetails(clubName):
       clubValues = [0,0,0,0,0,0]
       playerSalaries = []
       playerNames = []
-      playerValues = []
+      playerValues1 = []
+      playerValues2 = []
+      playerValues3 = []
+      playerValues4 = []
+      playerValues5 = []
       for player in players:
          playerSalaries.append((player[1] * 1000))
          playerNames.append(player[7])
          playerWeeksLeftInContract = getWeeksLeftInContract(player[2], player[3])
          playerPrices = calculatePrices((player[1] * 1000), player[5], playerWeeksLeftInContract, player[4], player[6])
-         playerValues.append(playerPrices[0])
+         playerValues1.append(playerPrices[0])
+         playerValues2.append(playerPrices[1])
+         playerValues3.append(playerPrices[2])
+         playerValues4.append(playerPrices[3])
+         playerValues5.append(playerPrices[4])
          for i in range(len(playerPrices)):
             clubValues[i] = clubValues[i] + playerPrices[i]
       print(clubValues)
-      print(playerValues)
       print(playerNames)
          
 
    conn.close()
 
 
-   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames, playerValues=playerValues)
+   return render_template('clubdetails.html', clubName = clubName, clubData = clubData, clubValues = clubValues, playerSalaries=playerSalaries, playerNames=playerNames, playerValues1=playerValues1, playerValues2=playerValues2, playerValues3=playerValues3, playerValues4=playerValues4, playerValues5=playerValues5)
 
 
 @app.route("/login", methods=["POST", "GET"]) #Route for the players page        
