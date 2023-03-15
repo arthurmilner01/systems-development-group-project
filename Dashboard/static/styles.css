@@ -88,9 +88,7 @@ Change colour for when button is pressed
 */
 
 .button:focus{
-
   color: red;
-  
   }
 
 #searchInput{
