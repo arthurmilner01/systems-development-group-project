@@ -266,13 +266,40 @@ def adminpage():
    checkLoggedIn()
    checkFirstVisit()
    if request.method == "POST":
-      pass
+      formName = request.form['form-adminpage']
+      if formName == "add-player-form":
+         pass
+      elif formName == "del-player-form":
+         with sqlite3.connect('MoneyballDB.db') as conn: 
+            cur = conn.cursor()
+            playerName = request.form["player-name-del"]
+            cur.execute("DELETE FROM Players WHERE player_name = ?", (playerName, ))
+            conn.commit()
+            flash("Player deleted.")
+            return redirect(url_for("adminpage"))
+      elif formName == "add-club-form":
+         pass
+      elif formName == "del-club-form":
+         with sqlite3.connect('MoneyballDB.db') as conn: 
+            cur = conn.cursor()
+            clubName = request.form["club-name-del"]
+            cur.execute("SELECT COUNT(*) FROM Players WHERE current_team = ?", (clubName, ))
+            result = cur.fetchone()
+            print(result[0])
+            if result[0] > 0:
+               flash("Club cannot be deleted as it still has " + str(result[0]) + " player(s).")
+               return redirect(url_for("adminpage"))
+            else:
+               cur.execute("DELETE FROM Clubs WHERE club_name = ?", (clubName, ))
+               conn.commit()
+               flash("Club deleted.")
+               return redirect(url_for("adminpage"))
    elif request.method == "GET": #Will run when user presses log-out button, this clears the current session variables concerned with being logged-in
       with sqlite3.connect('MoneyballDB.db') as conn: 
          cur = conn.cursor()
-         cur.execute("SELECT club_name FROM Clubs")
+         cur.execute("SELECT club_name FROM Clubs ORDER BY club_name ASC")
          clubNameList = cur.fetchall()
-         cur.execute("SELECT player_name FROM Players")
+         cur.execute("SELECT player_name FROM Players ORDER BY player_name ASC")
          playerNameList = cur.fetchall()
       return render_template("adminpage.html", clubNameList = clubNameList, playerNameList = playerNameList)
 
