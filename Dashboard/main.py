@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, session, flash, redirect, request, url_for
 from datetime import datetime
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "hello"
@@ -117,6 +118,7 @@ def players():
 @app.route("/clubs") #Route for the clubs page        
 def clubs():
    print("Clubs")
+   checkFirstVisit()
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
       cur.execute("SELECT * FROM Clubs")
@@ -127,6 +129,7 @@ def clubs():
 @app.route("/players/<playerName>")
 def playerDetails(playerName):
    print("Player Details")
+   checkFirstVisit()
    print(playerName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
@@ -170,6 +173,7 @@ def playerDetails(playerName):
 @app.route("/clubs/<clubName>")
 def clubDetails(clubName):
    print("Club Details")
+   checkFirstVisit()
    print(clubName)
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
@@ -210,6 +214,7 @@ def clubDetails(clubName):
 @app.route("/login", methods=["POST", "GET"]) #Route for the players page        
 def login():
    print("Login")
+   checkFirstVisit()
    if request.method == "POST":
       email = request.form["adminemail"]
       password = request.form["adminpassword"]
@@ -217,12 +222,21 @@ def login():
       print(password)
       with sqlite3.connect('MoneyballDB.db') as conn:      
          cur = conn.cursor()
-         cur.execute("SELECT * FROM Users WHERE email = ? AND password = ?", (email, password))
+         cur.execute("SELECT * FROM Users WHERE email = ?", (email,))
          results = cur.fetchone()
          if results != None:
             print("Account Found")
-            session["currentUserEmail"] = email
-            return redirect(url_for("adminpage"))
+            cur.execute("SELECT password FROM Users WHERE email = ?", (email,))
+            hashedPassword = cur.fetchone()
+            hashedPassword = "".join(hashedPassword)
+            print(hashedPassword)
+            if check_password_hash(hashedPassword, password) == True:
+               session["currentUserEmail"] = email
+               return redirect(url_for("adminpage"))
+            else:
+               print("Incorrect password")
+               flash("Error: Password was incorrect.")
+               return redirect(url_for("login"))
          else:
             print("Account not found.") 
             flash("Error: Email has not been recognised.")
@@ -239,6 +253,7 @@ def login():
 @app.route("/admin")
 def adminpage():
    print("Admin Page")
+   checkFirstVisit()
    return render_template("adminpage.html")
 
 if __name__ == "__main__":
