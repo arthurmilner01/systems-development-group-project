@@ -9,9 +9,11 @@
             <div class="card text-white bg-dark mb-3" style="width: 80%; margin-right: 5%; margin-left: 5%;">
                 <div class="card-body">
                     <h5 class="card-title" style="padding-top: 5%;">Log-In:</h5><br>
-                    <input class="form-control" type="text" id="email" name="email" placeholder="Please enter your email..." style="width: 50%; text-align:center; margin-left: auto; margin-right:auto;"><br><br>
-                    <input class="form-control" type="password" id="password" name="password" placeholder="Please enter your password..." style="width: 50%;text-align:center;margin-left: auto; margin-right:auto;"><br><br>
-                    <button id="login-button" class="btn btn-primary" type="submit">Log-In</button> 
+                    <form method="POST">
+                        <input class="form-control" name="adminemail" type="text" id="email" name="email" placeholder="Please enter your email..." style="width: 50%; text-align:center; margin-left: auto; margin-right:auto;"><br><br>
+                        <input class="form-control" name="adminpassword" type="password" id="password" name="password" placeholder="Please enter your password..." style="width: 50%;text-align:center;margin-left: auto; margin-right:auto;"><br><br>
+                        <button id="login-button" name="login" class="btn btn-primary" type="submit">Log-In</button> 
+                    </form>
                 </div>
             </div>
         </div>
