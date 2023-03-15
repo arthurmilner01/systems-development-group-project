@@ -20,3 +20,5 @@ class TestAdmin(unittest.TestCase):
     def add_player(self):
         pass
 
+if __name__ == '__main__':
+    unittest.main()
