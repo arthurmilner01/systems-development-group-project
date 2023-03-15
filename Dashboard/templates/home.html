@@ -10,8 +10,8 @@
             <div class="card text-white bg-dark mb-3" style="width: 40%; margin-right: 5%; margin-left: 5%; ">
                 <canvas id="trending-players-chart" width="720", height="500"></canvas>
                 <div class="card-body">
-                    <h5 class="card-title">Trending Players</h5>
-                    <p class="card-text">Graph showing the players with the highest potential change in value.</p>
+                    <h5 class="card-title">Comparing Players</h5>
+                    <p class="card-text">Graph comparing the values and future values of 5 random players.</p>
                 </div>
             </div>
             <div class="card text-white bg-dark mb-3" style="width: 40%; margin-right: 5%; margin-left: 5%; ">
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Player(s) to Watch<br><br></h4>
                     <!-- <p class="card-text">{{ player_name }} playing for {{ playerToWatch[5] }} is expected to get {{ future_games }} in his next five games. -->
-                      <p class="card-text">Based on a future games prediction, the players to watch this week are:</p>
+                      <p class="card-text">Based on a future games prediction, the current players are:</p>
                       <ul>
                         {% for result in result %}
                         <li>Player {{ result[0] }} with {{ result[2] }} in the {{ result [1] }} team!</li>
