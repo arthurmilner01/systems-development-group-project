@@ -6,12 +6,15 @@
 
 /*CSS for the logo on the sidebar */
  #logo{
+    background-color: #242526;
     max-width: 150px;
     max-height: 150px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom:30vh;
  }
+
+
  
  /* The side navigation menu */
  .sidebar {
@@ -26,6 +29,7 @@
   
   /* Sidebar links */
   .sidebar a {
+    background-color: #242526;
     display: block;
     color: #ffff;
     padding: 10%;
