@@ -29,9 +29,45 @@
         </div>
     </div>
     <div class="card-horizontal text-white bg-dark mb-6" style="width: 35%; margin-left: 5%; margin-right: 10%; margin-bottom: 10%;">
-      <canvas id="club-values-chart" width="720", height="366"></canvas>
+      <canvas id="club-values-chart1" width="720", height="366"></canvas>
       <div class="card-body">
           <h4 class="card-title">Club Player Values<br><br></h4>
+          <p class="card-text">Graph showing player values as a proportion of clubs value.</p>
+      </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 35%; margin-left: 10%; margin-right: 5%; margin-bottom: 10%;">
+      <canvas id="club-values-chart2" width="720", height="366"></canvas>
+      <div class="card-body">
+          <h4 class="card-title">Club Player Values Week 2<br><br></h4>
+          <p class="card-text">Graph showing player values as a proportion of clubs value.</p>
+      </div>
+  </div>
+    
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 35%; margin-left: 5%; margin-right: 10%; margin-bottom: 10%;">
+      <canvas id="club-values-chart3" width="720", height="366"></canvas>
+      <div class="card-body">
+          <h4 class="card-title">Club Player Values Week 3<br><br></h4>
+          <p class="card-text">Graph showing player values as a proportion of clubs value.</p>
+      </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 35%; margin-left: 10%; margin-right: 5%; margin-bottom: 10%;">
+      <canvas id="club-values-chart4" width="720", height="366"></canvas>
+      <div class="card-body">
+          <h4 class="card-title">Club Player Values Week 4<br><br></h4>
+          <p class="card-text">Graph showing player values as a proportion of clubs value.</p>
+      </div>
+  </div>
+    
+    <div class="card-horizontal text-white bg-dark mb-6" style="width: 35%; margin-left: 5%; margin-right: 10%; margin-bottom: 10%;">
+      <canvas id="club-values-chart5" width="720", height="366"></canvas>
+      <div class="card-body">
+          <h4 class="card-title">Club Player Values Week 5<br><br></h4>
           <p class="card-text">Graph showing player values as a proportion of clubs value.</p>
       </div>
   </div>
@@ -77,33 +113,89 @@
       }
     });
 
-    const ctx1 = document.getElementById('club-salaries-chart');
-  
-    new Chart(ctx1, {
-      type: 'doughnut',
-      data: {
-        labels: {{playerNames}},
-        datasets: [{
-          label: 'Player salaries for this club',
-          data: {{playerSalaries}},
-          hoverOffset: 4
-        }]
-      },
-    });
+const ctx1 = document.getElementById('club-salaries-chart');
 
-    const ctx2 = document.getElementById('club-values-chart');
-  
-    new Chart(ctx2, {
-      type: 'pie',
-      data: {
-        labels: {{playerNames}},
-        datasets: [{
-          label: 'Player values for this club',
-          data: {{playerValues}},
-          hoverOffset: 4
-        }]
-      },
-    });
+  new Chart(ctx1, {
+    type: 'doughnut',
+    data: {
+      labels: {{playerNames}},
+      datasets: [{
+        label: 'Player salaries for this club',
+        data: {{playerSalaries}},
+        hoverOffset: 4
+      }]
+    },
+  });
+
+  const ctx2 = document.getElementById('club-values-chart1');
+
+  new Chart(ctx2, {
+    type: 'pie',
+    data: {
+      labels: {{playerNames}},
+      datasets: [{
+        label: 'Player values for this club',
+        data: {{playerValues1}},
+        hoverOffset: 4
+      }]
+    },
+  });
+
+  const ctx3 = document.getElementById('club-values-chart2');
+
+  new Chart(ctx3, {
+    type: 'pie',
+    data: {
+      labels: {{playerNames}},
+      datasets: [{
+        label: 'Player values for this club',
+        data: {{playerValues2}},
+        hoverOffset: 4
+      }]
+    },
+  });
+
+  const ctx4 = document.getElementById('club-values-chart3');
+
+  new Chart(ctx4, {
+    type: 'pie',
+    data: {
+      labels: {{playerNames}},
+      datasets: [{
+        label: 'Player values for this club',
+        data: {{playerValues3}},
+        hoverOffset: 4
+      }]
+    },
+  });
+
+  const ctx5 = document.getElementById('club-values-chart4');
+
+  new Chart(ctx5, {
+    type: 'pie',
+    data: {
+      labels: {{playerNames}},
+      datasets: [{
+        label: 'Player values for this club',
+        data: {{playerValues4}},
+        hoverOffset: 4
+      }]
+    },
+  });
+
+  const ctx6 = document.getElementById('club-values-chart5');
+
+  new Chart(ctx6, {
+    type: 'pie',
+    data: {
+      labels: {{playerNames}},
+      datasets: [{
+        label: 'Player values for this club',
+        data: {{playerValues5}},
+        hoverOffset: 4
+      }]
+    },
+  });
 
 </script>
 
