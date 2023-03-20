@@ -12,6 +12,28 @@
                     <form method="post">
                         <input type="hidden" name="form-adminpage" value="add-player-form">
                         <input class="form-control" id="form-entry" name="player-name-add" type="text" placeholder="Please enter player name..."><br><br>
+                        <p>Player DoB:</p>
+                        <input class="form-control" id="form-entry" name="player-dob-add" type="date"><br><br>
+                        <select id="form-entry" class="form-select" name="player-gender-add" aria-label="Default select example">
+                            <option selected>Select player gender from dropdown...</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select><br><br>
+                        <p>Player Date Signed-Up:</p>
+                        <input class="form-control" id="form-entry" name="player-dsu-add" type="date"><br><br>
+                        <select id="form-entry" class="form-select" name="player-club-name-add" aria-label="Default select example">
+                            <option selected>Select player's current club from dropdown...</option>
+                            {% for name in clubNameList %}
+                                <option value={{ "".join(name) }}>{{ "".join(name) }}</option>
+                            {% endfor %}
+                        </select><br><br>
+                        <input class="form-control" id="form-entry" name="player-salary-add" type="text" placeholder="Please enter player salary... (e.g. input 50 = £50,000)"><br><br>
+                        <p>Player Start of Contract:</p>
+                        <input class="form-control" id="form-entry" name="player-soc-add" type="date"><br><br>
+                        <input class="form-control" id="form-entry" name="player-contract-duration-add" type="text" placeholder="Please enter player contract duration in years..."><br><br>
+                        <input class="form-control" id="form-entry" name="player-games-played-add" type="text" placeholder="Please enter player games played this year..."><br><br>
+                        <input class="form-control" id="form-entry" name="player-games-won-add" type="text" placeholder="Please enter player games won this year..."><br><br>
+                        <input class="form-control" id="form-entry" name="player-future-games-add" type="text" placeholder="Please enter player's 5 future games... (e.g. WLWWW)"><br><br>
                         <button id="form-button" name="add-player" class="btn btn-primary" type="submit">Add Player</button>
                     </form> 
                 </div>

@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, session, flash, redirect, request, url_for, abort
+from flask import Flask, render_template, session, flash, redirect, request, url_for, abort, escape
 from datetime import datetime
 from werkzeug.security import check_password_hash
 
@@ -273,26 +273,39 @@ def adminpage():
          with sqlite3.connect('MoneyballDB.db') as conn: 
             cur = conn.cursor()
             playerName = request.form["player-name-del"]
-            cur.execute("DELETE FROM Players WHERE player_name = ?", (playerName, ))
-            conn.commit()
-            flash("Player deleted.")
-            return redirect(url_for("adminpage"))
+            cur.execute("SELECT * FROM Players WHERE player_name = ?", (playerName, ))
+            result = cur.fetchone()
+            if result != None:
+               cur.execute("DELETE FROM Players WHERE player_name = ?", (playerName, ))
+               conn.commit()
+               flash("Player deleted.")
+               return redirect(url_for("adminpage"))
+            else:
+               flash("Player not found. Did you select a player from the dropdown?")
+               return redirect(url_for("adminpage"))
       elif formName == "add-club-form":
          pass
       elif formName == "del-club-form":
          with sqlite3.connect('MoneyballDB.db') as conn: 
             cur = conn.cursor()
             clubName = request.form["club-name-del"]
-            cur.execute("SELECT COUNT(*) FROM Players WHERE current_team = ?", (clubName, ))
-            result = cur.fetchone()
-            print(result[0])
-            if result[0] > 0:
-               flash("Club cannot be deleted as it still has " + str(result[0]) + " player(s).")
-               return redirect(url_for("adminpage"))
+            cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubName, ))
+            clubExists = cur.fetchone()
+            print(clubExists)
+            if clubExists != None:
+               cur.execute("SELECT COUNT(*) FROM Players WHERE current_team = ?", (clubName, ))
+               result = cur.fetchone()
+               print(result[0])
+               if result[0] > 0:
+                  flash("Club cannot be deleted as it still has " + str(result[0]) + " player(s).")
+                  return redirect(url_for("adminpage"))
+               else:
+                  cur.execute("DELETE FROM Clubs WHERE club_name = ?", (clubName, ))
+                  conn.commit()
+                  flash("Club deleted.")
+                  return redirect(url_for("adminpage"))
             else:
-               cur.execute("DELETE FROM Clubs WHERE club_name = ?", (clubName, ))
-               conn.commit()
-               flash("Club deleted.")
+               flash("Club not found. Did you select a club from the dropdown?")
                return redirect(url_for("adminpage"))
    elif request.method == "GET": #Will run when user presses log-out button, this clears the current session variables concerned with being logged-in
       with sqlite3.connect('MoneyballDB.db') as conn: 
