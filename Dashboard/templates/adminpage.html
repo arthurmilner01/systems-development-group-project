@@ -24,7 +24,7 @@
                         <select id="form-entry" class="form-select" name="player-club-name-add" aria-label="Default select example">
                             <option selected>Select player's current club from dropdown...</option>
                             {% for name in clubNameList %}
-                                <option value={{ "".join(name) }}>{{ "".join(name) }}</option>
+                                <option value="{{ name[0] }}">{{ name[0] }}</option>
                             {% endfor %}
                         </select><br><br>
                         <input class="form-control" id="form-entry" name="player-salary-add" type="text" placeholder="Please enter player salary... (e.g. input 50 = £50,000)"><br><br>
@@ -48,7 +48,7 @@
                         <select id="form-entry" class="form-select" name="player-name-del" aria-label="Default select example">
                             <option selected>Select player name from dropdown...</option>
                             {% for name in playerNameList %}
-                                <option value={{ "".join(name) }}>{{ "".join(name) }}</option>
+                                <option value="{{ name[0] }}">{{ name[0] }}</option>
                             {% endfor %}
                         </select><br><br>
                         <button id="form-button" name="delete-player" class="btn btn-primary" type="submit">Delete Player</button> 
@@ -80,7 +80,7 @@
                         <select id="form-entry" class="form-select" name="club-name-del" aria-label="Default select example">
                             <option selected>Select club name from dropdown...</option>
                             {% for name in clubNameList %}
-                                <option value={{ "".join(name) }}>{{ "".join(name) }}</option>
+                                <option value="{{ name[0] }}">{{ name[0] }}</option>
                             {% endfor %}
                         </select><br><br>
                         <button id="form-button" name="delete-club" class="btn btn-primary" type="submit">Delete Club</button> 

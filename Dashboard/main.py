@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, session, flash, redirect, request, url_for, abort, escape
+from flask import Flask, render_template, session, flash, redirect, request, url_for, abort
 from datetime import datetime
 from werkzeug.security import check_password_hash
 
@@ -289,6 +289,7 @@ def adminpage():
          with sqlite3.connect('MoneyballDB.db') as conn: 
             cur = conn.cursor()
             clubName = request.form["club-name-del"]
+            print(clubName)
             cur.execute("SELECT * FROM Clubs WHERE club_name = ?", (clubName, ))
             clubExists = cur.fetchone()
             print(clubExists)
