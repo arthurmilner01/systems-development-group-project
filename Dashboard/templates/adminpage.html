@@ -11,29 +11,37 @@
                     <h5 class="card-title">Add Player</h5><br><br>
                     <form method="post">
                         <input type="hidden" name="form-adminpage" value="add-player-form">
-                        <input class="form-control" id="form-entry" name="player-name-add" type="text" placeholder="Please enter player name..."><br><br>
+                        <p>Player Name:</p>
+                        <input class="form-control" id="form-entry" name="player-name-add" type="text" placeholder="Please enter player name..." required><br><br>
                         <p>Player DoB:</p>
-                        <input class="form-control" id="form-entry" name="player-dob-add" type="date"><br><br>
+                        <input class="form-control" id="form-entry" name="player-dob-add" type="date" required><br><br>
+                        <p>Player Gender:</p>
                         <select id="form-entry" class="form-select" name="player-gender-add" aria-label="Default select example">
                             <option selected>Select player gender from dropdown...</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select><br><br>
                         <p>Player Date Signed-Up:</p>
-                        <input class="form-control" id="form-entry" name="player-dsu-add" type="date"><br><br>
+                        <input class="form-control" id="form-entry" name="player-dsu-add" type="date" required><br><br>
+                        <p>Player Club:</p>
                         <select id="form-entry" class="form-select" name="player-club-name-add" aria-label="Default select example">
                             <option selected>Select player's current club from dropdown...</option>
                             {% for name in clubNameList %}
                                 <option value="{{ name[0] }}">{{ name[0] }}</option>
                             {% endfor %}
                         </select><br><br>
-                        <input class="form-control" id="form-entry" name="player-salary-add" type="text" placeholder="Please enter player salary... (e.g. input 50 = £50,000)"><br><br>
+                        <p>Player Salary:</p>
+                        <input class="form-control" id="form-entry" name="player-salary-add" type="text" placeholder="Please enter player salary... (e.g. input 50 = £50,000)" required><br><br>
                         <p>Player Start of Contract:</p>
-                        <input class="form-control" id="form-entry" name="player-soc-add" type="date"><br><br>
-                        <input class="form-control" id="form-entry" name="player-contract-duration-add" type="text" placeholder="Please enter player contract duration in years..."><br><br>
-                        <input class="form-control" id="form-entry" name="player-games-played-add" type="text" placeholder="Please enter player games played this year..."><br><br>
-                        <input class="form-control" id="form-entry" name="player-games-won-add" type="text" placeholder="Please enter player games won this year..."><br><br>
-                        <input class="form-control" id="form-entry" name="player-future-games-add" type="text" placeholder="Please enter player's 5 future games... (e.g. WLWWW)"><br><br>
+                        <input class="form-control" id="form-entry" name="player-soc-add" type="date" required><br><br>
+                        <p>Player Contract Duration:</p>
+                        <input class="form-control" id="form-entry" name="player-contract-duration-add" type="text" placeholder="Please enter player contract duration in years..." required><br><br>
+                        <p>Player Games Played This Year:</p>
+                        <input class="form-control" id="form-entry" name="player-games-played-add" type="text" placeholder="Please enter player games played this year..." required><br><br>
+                        <p>Player Games Won This Year:</p>
+                        <input class="form-control" id="form-entry" name="player-games-won-add" type="text" placeholder="Please enter player games won this year..." required><br><br>
+                        <p>Player Future Games:</p>
+                        <input class="form-control" id="form-entry" name="player-future-games-add" type="text" placeholder="Please enter player's 5 future games... (e.g. WLWWW)" required><br><br>
                         <button id="form-button" name="add-player" class="btn btn-primary" type="submit">Add Player</button>
                     </form> 
                 </div>
@@ -45,6 +53,7 @@
                     <h5 class="card-title">Delete Player</h5><br><br>
                     <form method="post">
                         <input type="hidden" name="form-adminpage" value="del-player-form">
+                        <p>Player Name:</p>
                         <select id="form-entry" class="form-select" name="player-name-del" aria-label="Default select example">
                             <option selected>Select player name from dropdown...</option>
                             {% for name in playerNameList %}
@@ -63,8 +72,11 @@
                     <h5 class="card-title">Add Club</h5><br><br>
                     <form method="post">
                         <input type="hidden" name="form-adminpage" value="add-club-form">
+                        <p>Player Club Name:</p>
                         <input class="form-control" id="form-entry" name="club-name-add" type="text" placeholder="Please enter club name..." required><br><br>
+                        <p>Player Club Location:</p>
                         <input class="form-control" id="form-entry" name="club-location-add" type="text" placeholder="Please enter club location..." required><br><br>
+                        <p>Player Club Manager:</p>
                         <input class="form-control" id="form-entry" name="club-manager-add" type="text" placeholder="Please enter club manager..." required><br><br>
                         <button id="form-button" name="add-club" class="btn btn-primary" type="submit">Add Club</button> 
                     </form>
@@ -77,6 +89,7 @@
                     <h5 class="card-title">Delete Club</h5><br><br>
                     <form method="post">
                         <input type="hidden" name="form-adminpage" value="del-club-form">
+                        <p>Club Name:</p>
                         <select id="form-entry" class="form-select" name="club-name-del" aria-label="Default select example">
                             <option selected>Select club name from dropdown...</option>
                             {% for name in clubNameList %}
