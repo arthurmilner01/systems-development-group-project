@@ -284,7 +284,24 @@ def adminpage():
                flash("Player not found. Did you select a player from the dropdown?")
                return redirect(url_for("adminpage"))
       elif formName == "add-club-form":
-         pass
+         with sqlite3.connect('MoneyballDB.db') as conn:
+            cur = conn.cursor()
+            clubName = request.form["club-name-add"].upper()
+            clubLocation = request.form["club-location-add"].upper()
+            clubManager = request.form["club-manager-add"].upper()
+            print(clubName)
+            print(clubLocation)
+            print(clubManager)
+            cur.execute("SELECT * FROM Clubs WHERE club_name = ?",(clubName,))
+            result = cur.fetchone()
+            if result == None:
+               cur.execute("INSERT INTO Clubs (club_name, club_location, club_manager) VALUES (?,?,?)", (clubName, clubLocation, clubManager))
+               conn.commit()
+               flash("Club " + clubName + " inserted with manager " + clubManager + " and located in " + clubLocation + ".")
+               return redirect(url_for("adminpage"))
+            else:
+               flash("That club name already exists.")
+               return redirect(url_for("adminpage"))
       elif formName == "del-club-form":
          with sqlite3.connect('MoneyballDB.db') as conn: 
             cur = conn.cursor()
