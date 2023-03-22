@@ -70,6 +70,28 @@
     text-align: center;
   }
 
+  #comparing-players-home{
+    width: 40%;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
+  #valuable-clubs-home{
+    width: 40%; 
+    margin-right: 5%; 
+    margin-left: 5%;
+  }
+
+  #player-to-watch-home{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  #player-to-watch-image{
+    float: left;
+  }
+
   /* CSS for tables */
 .table a{
   color: #ffff;
@@ -160,16 +182,67 @@ Change colour for when button is pressed
   }
 
   [class="sidebar"]{
-    height: 10%;
     width: 100%;
     position:relative;
+    font-size: 0px;
+    padding: 0%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #sidebar-icon-home{
+    font-size: 10px;
+  }
+
+  #sidebar-icon-player{
+    font-size: 10px;
+  }
+
+  #sidebar-icon-clubs{
+    font-size: 10px;
+  }
+
+  #sidebar-icon-admin{
+    font-size: 10px;
   }
 
   #logo{
-    max-width: 75px;
-    max-height: 75px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom:2vh;
+    display: none;
+    margin: 0%;
+    padding: 0%;
   }
+
+  [class="content"]{
+    margin-left: 0%;
+    width: 100%;
+  }
+
+  #comparing-players-home{
+    width:100%;
+    margin-left: 0%;
+    margin-right:0%;
+    font-size: 1.2rem;
+  }
+
+  #valuable-clubs-home{
+    width: 100%;
+    margin-left: 0%;
+    margin-right:0%;
+    font-size: 1.2rem;
+  }
+
+  #player-to-watch-home{
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    font-size: 1.2rem;
+  }
+
+  #player-to-watch-image{
+    float:none;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+  
 }
