@@ -213,7 +213,6 @@ def clubDetails(clubName):
          playerValues4=playerValues4+str(playerPrices[3])+','
          playerValues5=playerValues5+str(playerPrices[4])+','
          playerValuesDefault.append(playerPrices[0])
-         
          for i in range(len(playerPrices)):
             clubValues[i] = clubValues[i] + playerPrices[i]
       print(clubValues)
