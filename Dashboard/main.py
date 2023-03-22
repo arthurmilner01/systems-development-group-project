@@ -315,17 +315,11 @@ def adminpage():
             clubExists = cur.fetchone()
             print(clubExists)
             if clubExists != None:
-               cur.execute("SELECT COUNT(*) FROM Players WHERE current_team = ?", (clubName, ))
-               result = cur.fetchone()
-               print(result[0])
-               if result[0] > 0:
-                  flash("Club cannot be deleted as it still has " + str(result[0]) + " player(s).")
-                  return redirect(url_for("adminpage"))
-               else:
-                  cur.execute("DELETE FROM Clubs WHERE club_name = ?", (clubName, ))
-                  conn.commit()
-                  flash("Club deleted.")
-                  return redirect(url_for("adminpage"))
+               cur.execute("DELETE FROM Players WHERE current_team = ?", (clubName, ))
+               cur.execute("DELETE FROM Clubs WHERE club_name = ?", (clubName, ))
+               conn.commit()
+               flash("Club and players for that club deleted.")
+               return redirect(url_for("adminpage"))
             else:
                flash("Club not found. Did you select a club from the dropdown?")
                return redirect(url_for("adminpage"))
