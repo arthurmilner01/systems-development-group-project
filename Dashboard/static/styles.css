@@ -208,8 +208,8 @@ Change colour for when button is pressed
 
   #logo{
     display: none;
-    margin: none;
-    padding:none;
+    margin: 0%;
+    padding: 0%;
   }
 
   [class="content"]{
@@ -239,8 +239,10 @@ Change colour for when button is pressed
   }
 
   #player-to-watch-image{
-    float: center;
+    float:none;
     margin-bottom: 5%;
     margin-top: 5%;
   }
+
+  
 }
