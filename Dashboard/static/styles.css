@@ -3,6 +3,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+
 /*CSS for the logo on the sidebar */
  #logo{
     background-color: #242526;
@@ -52,6 +53,7 @@
     height: 100%;
     background-color: #18191A
   }
+
 
   /* CSS for page title text */
   .page-title{
@@ -119,17 +121,16 @@ Change colour for when button is pressed
 
 /* CSS for flash messages */
 .flash-messages{
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+  margin-left: 10%;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  width: 90%;
   font-weight: bold;
   text-align: center;
-  padding: 1%;
   border: 5px solid #b4b4b4;
-  border-radius: 25px;
   color: white;
   font-size: 1.4em;
-  background-color: #5c5c5c;
+  background-color: #414141;
 }
 
 #form-button{
