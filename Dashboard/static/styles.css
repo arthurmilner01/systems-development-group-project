@@ -70,6 +70,28 @@
     text-align: center;
   }
 
+  #comparing-players-home{
+    width: 40%;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
+  #valuable-clubs-home{
+    width: 40%; 
+    margin-right: 5%; 
+    margin-left: 5%;
+  }
+
+  #player-to-watch-home{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  #player-to-watch-image{
+    float: left;
+  }
+
   /* CSS for tables */
 .table a{
   color: #ffff;
@@ -190,8 +212,35 @@ Change colour for when button is pressed
     padding:none;
   }
 
-  [class="div.content"]{
+  [class="content"]{
     margin-left: 0%;
     width: 100%;
+  }
+
+  #comparing-players-home{
+    width:100%;
+    margin-left: 0%;
+    margin-right:0%;
+    font-size: 1.2rem;
+  }
+
+  #valuable-clubs-home{
+    width: 100%;
+    margin-left: 0%;
+    margin-right:0%;
+    font-size: 1.2rem;
+  }
+
+  #player-to-watch-home{
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    font-size: 1.2rem;
+  }
+
+  #player-to-watch-image{
+    float: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
   }
 }
