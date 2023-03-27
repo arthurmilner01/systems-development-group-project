@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask, render_template, session, flash, redirect, request, url_for, abort
 from datetime import datetime
 from werkzeug.security import check_password_hash
+import random
 
 app = Flask(__name__)
 app.secret_key = "hello"
@@ -176,12 +177,15 @@ def playerDetails(playerName):
    print(playerPrices)
 
    conn.close()
+   
+   photo = random.randint(1,7)
+   
    return render_template('playerdetails.html', playerName = playerName, playerDoB = playerDoB,\
                            playerGender = playerGender, playerDateSignedUp = playerDateSignedUp, playerCurrentTeam = playerCurrentTeam,\
                            playerTeamLocation = playerTeamLocation, playerTeamManager = playerTeamManager, playerSalary = playerSalary,\
                            playerStartOfContract = playerStartOfContract, playerContractDuration = playerContractDuration,\
                            playerGamesPlayedThisYear = playerGamesPlayedThisYear, playerGamesWon = playerGamesWon, playerFutureGames = playerFutureGames,\
-                           playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices)
+                           playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices, photo = photo)
 
 @app.route("/clubs/<clubName>")
 def clubDetails(clubName):
