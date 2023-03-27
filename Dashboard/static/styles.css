@@ -246,15 +246,15 @@ Change colour for when button is pressed
 /* CSS to improve phone view */
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  [class="card text-white bg-dark mb-3"] {
+  .card text-white bg-dark mb-3{
     font-size: 10px;
   }
 
-  [class="card-horizontal text-white bg-dark mb-6"] {
+  .card-horizontal text-white bg-dark mb-6{
     font-size: 10px;
   }
 
-  [class="sidebar"]{
+  .sidebar{
     width: 100%;
     position:relative;
     font-size: 0px;
@@ -285,8 +285,8 @@ Change colour for when button is pressed
     padding: 0%;
   }
 
-  [class="content"]{
-    margin-left: 0%;    
+  div.content{
+    margin-left:0%;    
     width: 100%;
   }
 
