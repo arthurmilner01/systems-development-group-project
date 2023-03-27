@@ -117,9 +117,9 @@ def home():
          week4.append(club[4])
          week5.append(club[5])  
          
-   photo = random.randint(1,6)
+   photo = 1
    
-   num = random.randint(1,10)
+   num = random.randint(1,60)
    
    if num == 5:
       photo = photo + 1
