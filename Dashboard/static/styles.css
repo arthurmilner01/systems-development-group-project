@@ -395,6 +395,12 @@ Change colour for when button is pressed
     margin-bottom: 10%;
   }
 
-  
+  .clubHide{
+    visibility:hidden;
+  }
+
+  .clubShow{
+    min-width: 250px;
+  }
 
 }
