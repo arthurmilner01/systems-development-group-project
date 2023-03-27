@@ -6,11 +6,11 @@
     <h1 class="page-title">Player Details:</h1>
 
     <div class="row" style="margin-top: 10%; padding-bottom: 10%;">
-      <div class="card text-white bg-dark mb-3" style="width: 25%; margin-right: 5%; margin-left: 10%;">
+      <div class="card text-white bg-dark mb-3" id="player-detail-card">
           <img class="" src="http://via.placeholder.com/225x250" alt="Photo of Player.">
           <div class="card-body">
               <h5 class="card-title">{{ playerName }} Details:</h5>
-              <p class="card-text" style="font-size:0.8em;">
+              <p class="card-text" id="player-details-text">
                   The player {{ playerName }}, born in {{ playerDoB }}, is currently playing for {{ playerCurrentTeam }},
                   located in {{ playerTeamLocation }}, and managed by {{ playerTeamManager }}. He signed for the club on 
                   {{ playerStartOfContract }} for a {{ playerContractDuration }} year deal, of which {{ playerWeeksLeftInContract }} 
@@ -19,7 +19,7 @@
               </p>
           </div>
       </div>
-      <div class="card text-white bg-dark mb-3" style="width: 50%; margin-right: 5%; margin-left: 5%;">
+      <div class="card text-white bg-dark mb-3" id="player-graph-card">
           <canvas id="player-prices-chart" width="720", height="366" style=" margin-top: 5%;"></canvas>
       </div>
   </div>

@@ -170,6 +170,79 @@ Change colour for when button is pressed
   margin-right:auto;
 }
 
+#admin-login{
+  width: 80%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+#admin-cards{
+  width: 90%; 
+  margin-right: 5%; 
+  margin-left: 5%; 
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#email{
+  width: 50%; 
+  text-align:center; 
+  margin-left: auto; 
+  margin-right:auto;
+  margin-top: 10%;
+}
+
+#password{
+  width: 50%; 
+  text-align:center; 
+  margin-left: auto; 
+  margin-right:auto;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+#player-detail-card{
+  width: 25%;
+  margin-right: 5%;
+  margin-left: 10%;
+}
+
+#player-details-text{
+  font-size:0.8em;
+}
+
+#player-graph-card{
+  width: 40%;
+  margin-right: 5%;
+  margin-left: 10%;
+}
+
+#club-details-card{
+  width: 25%; 
+  margin-right: 5%; 
+  margin-left: 10%
+}
+
+#club-value-graph-card{
+  width: 45%; 
+  margin-right: 10%; 
+  margin-left: 5%;
+}
+
+#club-salaries-card{
+  width: 35%; 
+  margin-left: 10%; 
+  margin-right: 5%; 
+  margin-bottom: 10%;
+}
+
+#club-values-card{
+  width: 35%; 
+  margin-left: 5%; 
+  margin-right: 10%; 
+  margin-bottom: 10%;
+}
+
 /* CSS to improve phone view */
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
@@ -213,7 +286,7 @@ Change colour for when button is pressed
   }
 
   [class="content"]{
-    margin-left: 0%;
+    margin-left: 0%;    
     width: 100%;
   }
 
@@ -244,5 +317,81 @@ Change colour for when button is pressed
     margin-top: 5%;
   }
 
+  /* CSS for admin pages */
+  #admin-login{
+    width: 100%;
+    margin-right: 0%;
+    margin-left: 0%;
+  }
   
+  #email{
+    width: 100%; 
+    text-align:center; 
+    margin-left: auto; 
+    margin-right:auto;
+  }
+  
+  #password{
+    width: 100%; 
+    text-align:center; 
+    margin-left: auto; 
+    margin-right:auto;
+  }
+
+  #form-entry{
+    width: 100%; 
+    text-align:center; 
+    margin-left: auto; 
+    margin-right:auto;
+  }
+
+  #form-button{
+    width: 60%; 
+    margin-bottom: 5%; 
+    background-color: rgb(54, 54, 54);
+    border: 2px solid #E8E8E8;
+  }
+
+  #player-detail-card{
+    width: 100%;
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+
+  #player-graph-card{
+    width: 100%;
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+
+  #player-details-text{
+    font-size : 1rem;
+  }
+
+
+  #club-details-card{
+    width: 100%; 
+    margin-right: 0%; 
+    margin-left: 0%
+  }
+
+  #club-value-graph-card{
+    width: 100%; 
+    margin-right: 0%; 
+    margin-left: 0%;
+  }
+
+  #club-salaries-card{
+    width: 100%; 
+    margin-left: 0%; 
+    margin-right: 0%; 
+    margin-bottom: 00%;
+  }
+  
+  #club-values-card{
+    width: 100%; 
+    margin-left: 0%; 
+    margin-right: 0%; 
+    margin-bottom: 10%;
+  }
 }
