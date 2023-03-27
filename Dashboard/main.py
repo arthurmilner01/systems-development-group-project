@@ -117,7 +117,15 @@ def home():
          week4.append(club[4])
          week5.append(club[5])  
          
-   photo = random.randint(1,4)
+   photo = random.randint(1,6)
+   
+   num = random.randint(1,10)
+   
+   if num == 5:
+      photo = photo + 1
+   
+   
+   
    return render_template("home.html",photo=photo, result=result, name1 = data[0][1], name2 = data[1][1], name3 = data[2][1], name4 = data[3][1], name5 = data[4][1], player1 = trendingPlayers[0], player2 = trendingPlayers[1], player3 = trendingPlayers[2], player4 = trendingPlayers[3], player5 = trendingPlayers[4], playerToWatch = data[0], week0 = week0, week1 = week1, week2 = week2, week3 = week3, week4 = week4, week5 = week5, club1 = clubs[0][6], club2 = clubs[1][6], club3 = clubs[2][6], club4 = clubs[3][6], club5 = clubs[4][6], club6 = clubs[5][6])
 
 @app.route("/players") #Route for the players page        

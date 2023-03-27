@@ -39,6 +39,8 @@
       labels: ['Current Price', 'Future Game 1', 'Future Game 2', 'Future Game 3', 'Future Game 4', 'Future Game 5'],
       showInLegend: true,
       datasets: [{
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'red',
         label: 'Market Value in £',
         data: {{ playerPrices }},
         borderWidth: 1,
