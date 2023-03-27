@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask, render_template, session, flash, redirect, request, url_for, abort
 from datetime import datetime
 from werkzeug.security import check_password_hash
+import random
 
 app = Flask(__name__)
 app.secret_key = "hello"
@@ -115,7 +116,9 @@ def home():
          week3.append(club[3])
          week4.append(club[4])
          week5.append(club[5])  
-   return render_template("home.html", result=result, name1 = data[0][1], name2 = data[1][1], name3 = data[2][1], name4 = data[3][1], name5 = data[4][1], player1 = trendingPlayers[0], player2 = trendingPlayers[1], player3 = trendingPlayers[2], player4 = trendingPlayers[3], player5 = trendingPlayers[4], playerToWatch = data[0], week0 = week0, week1 = week1, week2 = week2, week3 = week3, week4 = week4, week5 = week5, club1 = clubs[0][6], club2 = clubs[1][6], club3 = clubs[2][6], club4 = clubs[3][6], club5 = clubs[4][6], club6 = clubs[5][6])
+         
+   photo = random.randint(1,4)
+   return render_template("home.html",photo=photo, result=result, name1 = data[0][1], name2 = data[1][1], name3 = data[2][1], name4 = data[3][1], name5 = data[4][1], player1 = trendingPlayers[0], player2 = trendingPlayers[1], player3 = trendingPlayers[2], player4 = trendingPlayers[3], player5 = trendingPlayers[4], playerToWatch = data[0], week0 = week0, week1 = week1, week2 = week2, week3 = week3, week4 = week4, week5 = week5, club1 = clubs[0][6], club2 = clubs[1][6], club3 = clubs[2][6], club4 = clubs[3][6], club5 = clubs[4][6], club6 = clubs[5][6])
 
 @app.route("/players") #Route for the players page        
 def players():
@@ -176,12 +179,15 @@ def playerDetails(playerName):
    print(playerPrices)
 
    conn.close()
+   
+   photo = random.randint(1,7)
+   
    return render_template('playerdetails.html', playerName = playerName, playerDoB = playerDoB,\
                            playerGender = playerGender, playerDateSignedUp = playerDateSignedUp, playerCurrentTeam = playerCurrentTeam,\
                            playerTeamLocation = playerTeamLocation, playerTeamManager = playerTeamManager, playerSalary = playerSalary,\
                            playerStartOfContract = playerStartOfContract, playerContractDuration = playerContractDuration,\
                            playerGamesPlayedThisYear = playerGamesPlayedThisYear, playerGamesWon = playerGamesWon, playerFutureGames = playerFutureGames,\
-                           playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices)
+                           playerWeeksLeftInContract = playerWeeksLeftInContract, playerPrices = playerPrices, photo = photo)
 
 @app.route("/clubs/<clubName>")
 def clubDetails(clubName):
@@ -285,33 +291,66 @@ def adminpage():
             playerGamesPlayed = request.form["player-games-played-add"].upper()
             playerGamesWon = request.form["player-games-won-add"].upper()
             playerFutureGames = request.form["player-future-games-add"].upper()
-            if re.search(r"^([A-Z]{2})([\d]{3})$", playerName) == None:        
-               print(playerName)
+            print(playerName)
             print(playerDOB)
             print(playerGender)
             print(playerDSU)
             print(playerClubName)
+            print(playerSalary)
+            print(playerSOC)
+            print(playerContractDuration)
+            print(playerGamesPlayed) 
+            print(playerGamesWon)  
+            print(playerFutureGames)
+            # VALIDATION
+            if re.search(r"^([A-Z]{2})([\d]{3})$", playerName) == None:      
+               flash("Incorrect name format: " + str(playerName))
+               return redirect(url_for("adminpage"))  
+            date_format = "%Y-%m-%d"  
+            correct_format = '%d/%m/%Y'
+            now = datetime.now()
+            now = now.strftime(correct_format)
+            now = datetime.strptime(now, correct_format)            
+            compareDate = datetime.strptime(playerDOB, date_format)
+            playerDOB = compareDate.strftime(correct_format) 
+            if compareDate > now:
+               flash("Date of birth in future: " + str(playerDOB))
+               return redirect(url_for("adminpage"))
+            compareDate = datetime.strptime(playerDSU, date_format)
+            playerDSU = compareDate.strftime(correct_format) 
+            if compareDate > now:
+               flash("Date signed up in future: " + str(playerDSU))
+               return redirect(url_for("adminpage"))
+            compareDate = datetime.strptime(playerSOC, date_format)
+            playerSOC = compareDate.strftime(correct_format) 
+            if compareDate > now:
+               flash("Start of contract in future: " + str(playerSOC))
+               return redirect(url_for("adminpage"))
             if re.search(r"^[0-9]+$", playerSalary) == None:
                flash("Incorrect salary format : " + str(playerSalary))
                return redirect(url_for("adminpage"))
-            print(playerSalary)
-            print(playerSOC)
             if re.search(r"^[0-9]+$", playerContractDuration) == None:
                flash("Incorrect contract duration format : " + str(playerContractDuration))
                return redirect(url_for("adminpage"))
-            print(playerContractDuration)
             if re.search(r"^[0-9]+$", playerGamesPlayed) == None:
                flash("Incorrect games played format : " + str(playerGamesPlayed))
                return redirect(url_for("adminpage"))
-            print(playerGamesPlayed)
             if re.search(r"^[0-9]+$", playerGamesWon) == None:
                flash("Incorrect games won format : " + str(playerGamesWon))
                return redirect(url_for("adminpage"))
-            print(playerGamesWon)
             if re.search(r"^[WLD]{5}$", playerFutureGames) == None:
                flash("Incorrect future games format : " + str(playerFutureGames))
                return redirect(url_for("adminpage"))
-            print(playerFutureGames)
+            cur.execute("SELECT * FROM Players WHERE player_name = ?",(playerName,))
+            result = cur.fetchone()
+            if result == None:
+               cur.execute("INSERT INTO Players (player_name, date_of_birth, gender, date_signed_up, current_team, salary, start_of_contract, contract_duration, games_played_this_year, games_won, future_games) VALUES (?,?,?,?,?,?,?,?,?,?,?)", (playerName, playerDOB, playerGender, playerDSU, playerClubName, playerSalary, playerSOC, playerContractDuration, playerGamesPlayed, playerGamesWon, playerFutureGames))
+               conn.commit()
+               flash("Player Added.")
+               return redirect(url_for("adminpage"))
+            else:
+               flash("Player name already found. Check player name")
+               return redirect(url_for("adminpage"))
             
       elif formName == "del-player-form":
          with sqlite3.connect('MoneyballDB.db') as conn: 
