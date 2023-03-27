@@ -25,57 +25,35 @@
               <span aria-hidden="true"></span>
               <i class="fa fa-fw fa-sort"></i>
             </button>
-            <th>
-              <button class="button">
-                Date of Birth
-                <span aria-hidden="true"></span>
-              </button>
+          </th>
               <th>
                 <button class="button">
                   Gender
                   <span aria-hidden="true"></span>
                   <i class="fa fa-fw fa-sort"></i>
                 </button>
-                <th>
-                  <button class="button">
-                    Sign-Up Date
-                    <span aria-hidden="true"></span>
-                  </button>
+              </th>
                   <th>
                     <button class="button">
                       Current Team
                       <span aria-hidden="true"></span>
                       <i class="fa fa-fw fa-sort"></i>
                     </button>
+                  </th>
                     <th class="num">
                       <button class="button">
                         Salary
                         <span aria-hidden="true"></span>
                         <i class="fa fa-fw fa-sort"></i>
                       </button>
-                      <th class="num">
-                        <button class="button">
-                          Contract Start Date
-                          <span aria-hidden="true"></span>
-                        </button>
-                        <th class="num">
-                          <button class="button">
-                            Contract Duration
-                            <span aria-hidden="true"></span>
-                            <i class="fa fa-fw fa-sort"></i>
-                          </button>
+                    </th>
                           <th class="num">
                             <button class="button">
-                              Games Played
+                              Winrate(%)
                               <span aria-hidden="true"></span>
                               <i class="fa fa-fw fa-sort"></i>
                             </button>
-                            <th class="num">
-                              <button class="button">
-                                Games Won
-                                <span aria-hidden="true"></span>
-                                <i class="fa fa-fw fa-sort"></i>
-                              </button>
+                          </th>
                               <th class="num">
                                 <button class="button">
                                   Future Games
@@ -103,7 +81,7 @@
           {% for j in p %}
               {% if loop.index == 2 %}
                 <td scope="row"><a href="{{ url_for('playerDetails', playerName=j) }}">{{j}}</a></td>
-              {%elif loop.index == 6 %}
+              {%elif loop.index == 4 %}
                 <td scope="row"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></td>
               {% else %}
                 <td scope="row">{{j}}</td>
