@@ -13,8 +13,13 @@
       <thead>
         <tr>
           {% for col in clubHeadings %}
-            <th><button class="button">{{ col }}</button>
+            {% if loop.index == 2 %}
+            <th class="clubShow"><button class="button">{{ col }}</button>
               <i class="fa fa-fw fa-sort"></i></th>
+            {% else %}
+            <th class="clubHide"><button class="button">{{ col }}</button>
+              <i class="fa fa-fw fa-sort"></i></th>
+            {% endif %}
           {% endfor %}
         </tr>
       </thead>
@@ -23,9 +28,9 @@
         <tr>
           {% for j in c %}
               {% if loop.index == 2 %}
-                <td scope="row" ><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></td>
+                <td scope="row" class="clubShow"><a href="{{ url_for('clubDetails', clubName=j) }}">{{j}}</a></td>
               {% else %}
-                <td scope="row">{{j}}</td>
+                <td scope="row" class="clubHide">{{j}}</td>
               {% endif %}
           {% endfor %}
         </tr>

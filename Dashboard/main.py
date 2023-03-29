@@ -117,9 +117,9 @@ def home():
          week4.append(club[4])
          week5.append(club[5])  
          
-   photo = random.randint(1,6)
+   photo = 1
    
-   num = random.randint(1,10)
+   num = random.randint(1,60)
    
    if num == 5:
       photo = photo + 1
@@ -134,8 +134,14 @@ def players():
    checkFirstVisit()
    with sqlite3.connect('MoneyballDB.db') as conn:      
       cur = conn.cursor()
-      cur.execute("SELECT * FROM Players")
+      cur.execute("SELECT player_ID, player_name, gender, current_team, salary, games_played_this_year, games_won, future_games FROM Players")
       playerData = cur.fetchall()
+      for i in  range(len(playerData)):
+         player = list(playerData[i])
+         player[5] = round(float(player[6]/player[5]*100), 2)
+         player.remove(player[6])
+         playerData[i] = player
+      print(playerData)
    conn.close()
    return render_template("players.html", playerHeadings = playerHeadings, playerData=playerData)
 

@@ -395,6 +395,24 @@ Change colour for when button is pressed
     margin-bottom: 10%;
   }
 
-  
+  .clubHide{
+    display: none;
+  }
+
+  .clubShow{
+    min-width: 100%;
+  }
+
+  .playerHide{
+    display: none;
+  }
+
+  .playerShow{
+    min-width: 50%;
+  }
+
+  .num{
+    display: none;
+  }
 
 }
